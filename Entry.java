@@ -24,4 +24,8 @@ public class Entry {
     public void setExtension(String extension) {
         this.extension = extension;
     }
+
+    public String toString() {
+        return String.format("¦%s, %s, %s¦", this.getSurname(), this.getInitials(), this.getExtension());
+    }
 }
