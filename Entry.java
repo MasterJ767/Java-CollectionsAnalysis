@@ -29,3 +29,4 @@ public class Entry {
         return String.format("¦%s, %s, %s¦", this.getSurname(), this.getInitials(), this.getExtension());
     }
 }
+

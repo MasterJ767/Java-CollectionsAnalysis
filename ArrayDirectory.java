@@ -16,7 +16,7 @@ public abstract class ArrayDirectory implements Directory {
         System.arraycopy(directory, 0, newDirectory, 0, currentLength);
         // Add the new entry to the end
         newDirectory[currentLength] = entry;
-        // change the reference of this.directory to the new array
+        // Change the reference of this.directory to the new array
         directory = newDirectory;
     }
 
@@ -35,9 +35,17 @@ public abstract class ArrayDirectory implements Directory {
                 if (i < (currentLength - 1)) {
                     System.arraycopy(directory, i + 1, newDirectory, i, currentLength - (i + 1));
                 }
+                // Change the reference of this.directory to the new array
                 directory = newDirectory;
                 break;
             }
+        }
+        // If the given surname cannot be found within the directory throw an error
+        try {
+            throw new SurnameNotFoundException(String.format("The surname %s could not be found in the directory, therefore it was not deleted", surname));
+        }
+        catch(SurnameNotFoundException e) {
+            System.out.println(e.getMessage());
         }
     }
 
@@ -56,21 +64,57 @@ public abstract class ArrayDirectory implements Directory {
                 if (i < (currentLength - 1)) {
                     System.arraycopy(directory, i + 1, newDirectory, i, currentLength - (i + 1));
                 }
+                // Change the reference of this.directory to the new array
                 directory = newDirectory;
                 break;
             }
         }
+        // If the given extension cannot be found within the directory throw an error
+        try {
+            throw new ExtensionNotFoundException(String.format("The extension %s could not be found in the directory, therefore it was not deleted", number));
+        }
+        catch(ExtensionNotFoundException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     public void updateExtensionUsingName(String surname, String newNumber) {
-        ;
+        // Find entry which contains the given surname
+        for (Entry entry : directory) {
+            if (entry.getSurname().equals(surname)) {
+                // Change extension information
+                entry.setExtension(newNumber);
+                break;
+            }
+        }
+        // If the given surname cannot be found within the directory throw an error
+        try {
+            throw new SurnameNotFoundException(String.format("The surname %s could not be found in the directory, therefore no extensions were updated", surname));
+        }
+        catch(SurnameNotFoundException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     public String lookupExtension(String surname) {
-        ;
+        // Find entry which contains the given surname
+        for (Entry entry : directory) {
+            if (entry.getSurname().equals(surname)) {
+                // Return extension information
+                return entry.getExtension();
+            }
+        }
+        // If the given surname cannot be found within the directory throw an error
+        try {
+            throw new SurnameNotFoundException(String.format("The surname %s could not be found in the directory", surname));
+        }
+        catch(SurnameNotFoundException e) {
+            System.out.println(e.getMessage());
+            return null;
+        }
     }
 
     public List<Entry> toArrayList() {
-        ;
+        return Arrays.asList(directory);
     }
 }
