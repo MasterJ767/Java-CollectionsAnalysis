@@ -4,7 +4,7 @@ public abstract class ArrayListDirectory implements Directory {
     private ArrayList<Entry> directory;
 
     public ArrayListDirectory() {
-        this.directory = new ArrayList<>();
+        directory = new ArrayList<>();
     }
 
     public void insertEntry (Entry entry) {

@@ -4,7 +4,7 @@ public abstract class ArrayDirectory implements Directory {
     private Entry[] directory;
 
     public ArrayDirectory() {
-        this.directory = new Entry[0];
+        directory = new Entry[0];
     }
 
     public void insertEntry (Entry entry) {
