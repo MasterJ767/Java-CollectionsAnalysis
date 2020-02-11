@@ -7,6 +7,7 @@ public abstract class ArrayDirectory implements Directory {
         directory = new Entry[0];
     }
 
+    @Override
     public void insertEntry (Entry entry) {
         // Obtain length of current directory
         int currentLength = directory.length;
@@ -20,6 +21,7 @@ public abstract class ArrayDirectory implements Directory {
         directory = newDirectory;
     }
 
+    @Override
     public void deleteEntryUsingName(String surname) {
         try {
             // Throw an error if there is an attempt to remove an entry from an empty directory
@@ -58,6 +60,7 @@ public abstract class ArrayDirectory implements Directory {
         }
     }
 
+    @Override
     public void deleteEntryUsingExtension(String number) {
         try {
             // Throw an error if there is an attempt to remove an entry from an empty directory
@@ -96,6 +99,7 @@ public abstract class ArrayDirectory implements Directory {
         }
     }
 
+    @Override
     public void updateExtensionUsingName(String surname, String newNumber) {
         // Find entry which contains the given surname
         for (Entry entry : directory) {
@@ -114,6 +118,7 @@ public abstract class ArrayDirectory implements Directory {
         }
     }
 
+    @Override
     public String lookupExtension(String surname) {
         // Find entry which contains the given surname
         for (Entry entry : directory) {
@@ -132,6 +137,7 @@ public abstract class ArrayDirectory implements Directory {
         }
     }
 
+    @Override
     public List<Entry> toArrayList() {
         return Arrays.asList(directory);
     }

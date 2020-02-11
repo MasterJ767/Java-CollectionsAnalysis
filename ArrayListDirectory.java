@@ -7,10 +7,12 @@ public abstract class ArrayListDirectory implements Directory {
         directory = new ArrayList<>();
     }
 
+    @Override
     public void insertEntry (Entry entry) {
         directory.add(entry);
     }
 
+    @Override
     public void deleteEntryUsingName(String surname) {
         try {
             // Throw an error if there is an attempt to remove an entry from an empty directory
@@ -38,6 +40,7 @@ public abstract class ArrayListDirectory implements Directory {
         }
     }
 
+    @Override
     public void deleteEntryUsingExtension(String number) {
         try {
             // Throw an error if there is an attempt to remove an entry from an empty directory
@@ -65,6 +68,7 @@ public abstract class ArrayListDirectory implements Directory {
         }
     }
 
+    @Override
     public void updateExtensionUsingName(String surname, String newNumber) {
         // Find entry which contains the given surname
         for (Entry entry : directory) {
@@ -83,6 +87,7 @@ public abstract class ArrayListDirectory implements Directory {
         }
     }
 
+    @Override
     public String lookupExtension(String surname) {
         // Find entry which contains the given surname
         for (Entry entry : directory) {
@@ -101,6 +106,7 @@ public abstract class ArrayListDirectory implements Directory {
         }
     }
 
+    @Override
     public List<Entry> toArrayList() {
         return directory;
     }

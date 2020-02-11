@@ -9,11 +9,13 @@ public class HashMapDirectory implements Directory {
         extensionDirectory = new HashMap<>();
     }
 
+    @Override
     public void insertEntry (Entry entry) {
         surnameDirectory.put(entry.getSurname(), entry);
         extensionDirectory.put(entry.getExtension(), entry);
     }
 
+    @Override
     public void deleteEntryUsingName(String surname) {
         try {
             // Throw an error if there is an attempt to remove an entry from an empty directory
@@ -42,6 +44,7 @@ public class HashMapDirectory implements Directory {
         }
     }
 
+    @Override
     public void deleteEntryUsingExtension(String number) {
         try {
             // Throw an error if there is an attempt to remove an entry from an empty directory
@@ -70,6 +73,7 @@ public class HashMapDirectory implements Directory {
         }
     }
 
+    @Override
     public void updateExtensionUsingName(String surname, String newNumber) {
         // Find entry which contains the given surname
         if (surnameDirectory.containsKey(surname)) {
@@ -85,6 +89,7 @@ public class HashMapDirectory implements Directory {
         }
     }
 
+    @Override
     public String lookupExtension(String surname) {
         // Find entry which contains the given surname
         if (surnameDirectory.containsKey(surname)) {
@@ -101,6 +106,7 @@ public class HashMapDirectory implements Directory {
         }
     }
 
+    @Override
     public List<Entry> toArrayList() {
         ArrayList<Entry> directory = new ArrayList<>();
         for (String key : surnameDirectory.keySet()) {
