@@ -30,6 +30,6 @@ public class CSVHandler {
     }
 
     public void output(String location, ArrayList<Entry> records) {
-        
+
     }
 }

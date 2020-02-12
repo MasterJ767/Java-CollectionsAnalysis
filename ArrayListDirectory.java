@@ -13,58 +13,50 @@ public abstract class ArrayListDirectory implements Directory {
     }
 
     @Override
-    public void deleteEntryUsingName(String surname) {
-        try {
-            // Throw an error if there is an attempt to remove an entry from an empty directory
-            if (directory.size() == 0) {
-                throw new EmptyDirectoryException("An attempt to remove an entry from an empty directory was made.");
-            } else {
-                // Find entry which contains the given surname
-                for (Entry entry: directory) {
-                    if (entry.getSurname().equals(surname)) {
-                        // Delete entry from directory
-                        directory.remove(entry);
-                        break;
-                    }
-                }
-                // If the given surname cannot be found within the directory throw an error
-                try {
-                    throw new SurnameNotFoundException(String.format("The surname %s could not be found in the directory, therefore it was not deleted", surname));
-                }
-                catch(SurnameNotFoundException e) {
-                    System.out.println(e.getMessage());
+    public void deleteEntryUsingName(String surname) throws EmptyDirectoryException{
+        // Throw an error if there is an attempt to remove an entry from an empty directory
+        if (directory.size() == 0) {
+            throw new EmptyDirectoryException("An attempt to remove an entry from an empty directory was made.");
+        } else {
+            // Find entry which contains the given surname
+            for (Entry entry: directory) {
+                if (entry.getSurname().equals(surname)) {
+                    // Delete entry from directory
+                    directory.remove(entry);
+                    break;
                 }
             }
-        } catch (EmptyDirectoryException f) {
-            System.out.println(f.getMessage());
+            // If the given surname cannot be found within the directory throw an error
+            try {
+                throw new SurnameNotFoundException(String.format("The surname %s could not be found in the directory, therefore it was not deleted", surname));
+            }
+            catch(SurnameNotFoundException e) {
+                System.out.println(e.getMessage());
+            }
         }
     }
 
     @Override
-    public void deleteEntryUsingExtension(String number) {
-        try {
-            // Throw an error if there is an attempt to remove an entry from an empty directory
-            if (directory.size() == 0) {
-                throw new EmptyDirectoryException("An attempt to remove an entry from an empty directory was made.");
-            } else {
-                // Find entry which contains the given extension
-                for (Entry entry: directory) {
-                    if (entry.getExtension().equals(number)) {
-                        // Delete entry from directory
-                        directory.remove(entry);
-                        break;
-                    }
-                }
-                // If the given extension cannot be found within the directory throw an error
-                try {
-                    throw new ExtensionNotFoundException(String.format("The extension %s could not be found in the directory, therefore it was not deleted", number));
-                }
-                catch(ExtensionNotFoundException e) {
-                    System.out.println(e.getMessage());
+    public void deleteEntryUsingExtension(String number) throws EmptyDirectoryException{
+        // Throw an error if there is an attempt to remove an entry from an empty directory
+        if (directory.size() == 0) {
+            throw new EmptyDirectoryException("An attempt to remove an entry from an empty directory was made.");
+        } else {
+            // Find entry which contains the given extension
+            for (Entry entry: directory) {
+                if (entry.getExtension().equals(number)) {
+                    // Delete entry from directory
+                    directory.remove(entry);
+                    break;
                 }
             }
-        } catch (EmptyDirectoryException f) {
-            System.out.println(f.getMessage());
+            // If the given extension cannot be found within the directory throw an error
+            try {
+                throw new ExtensionNotFoundException(String.format("The extension %s could not be found in the directory, therefore it was not deleted", number));
+            }
+            catch(ExtensionNotFoundException e) {
+                System.out.println(e.getMessage());
+            }
         }
     }
 
