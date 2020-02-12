@@ -26,7 +26,7 @@ public class Entry {
     }
 
     public String toString() {
-        return String.format("¦%s, %s, %s¦", getSurname(), getInitials(), getExtension());
+        return String.format("%s,%s,%s", getSurname(), getInitials(), getExtension());
     }
 
     public boolean equals(Object anObject) {

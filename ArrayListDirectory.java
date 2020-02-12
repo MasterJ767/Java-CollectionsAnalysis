@@ -32,6 +32,7 @@ public abstract class ArrayListDirectory implements Directory {
             }
             catch(SurnameNotFoundException e) {
                 System.out.println(e.getMessage());
+                e.printStackTrace();
             }
         }
     }
@@ -56,6 +57,7 @@ public abstract class ArrayListDirectory implements Directory {
             }
             catch(ExtensionNotFoundException e) {
                 System.out.println(e.getMessage());
+                e.printStackTrace();
             }
         }
     }
@@ -76,6 +78,7 @@ public abstract class ArrayListDirectory implements Directory {
         }
         catch(SurnameNotFoundException e) {
             System.out.println(e.getMessage());
+            e.printStackTrace();
         }
     }
 
@@ -94,6 +97,7 @@ public abstract class ArrayListDirectory implements Directory {
         }
         catch(SurnameNotFoundException e) {
             System.out.println(e.getMessage());
+            e.printStackTrace();
             return null;
         }
     }

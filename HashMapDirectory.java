@@ -36,6 +36,7 @@ public class HashMapDirectory implements Directory {
             }
             catch(SurnameNotFoundException e) {
                 System.out.println(e.getMessage());
+                e.printStackTrace();
             }
         }
     }
@@ -61,6 +62,7 @@ public class HashMapDirectory implements Directory {
             }
             catch(ExtensionNotFoundException e) {
                 System.out.println(e.getMessage());
+                e.printStackTrace();
             }
         }
     }
@@ -78,6 +80,7 @@ public class HashMapDirectory implements Directory {
         }
         catch(SurnameNotFoundException e) {
             System.out.println(e.getMessage());
+            e.printStackTrace();
         }
     }
 
@@ -94,6 +97,7 @@ public class HashMapDirectory implements Directory {
         }
         catch(SurnameNotFoundException e) {
             System.out.println(e.getMessage());
+            e.printStackTrace();
             return null;
         }
     }
