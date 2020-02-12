@@ -28,5 +28,27 @@ public class Entry {
     public String toString() {
         return String.format("¦%s, %s, %s¦", getSurname(), getInitials(), getExtension());
     }
+
+    public boolean equals(Object anObject) {
+        if (this == anObject) {
+            return true;
+        }
+        if (anObject instanceof Entry) {
+            Entry anotherEntry = (Entry) anObject;
+            int n = surname.length();
+            if (n == anotherEntry.surname.length()) {
+                char[] v1 = surname.toCharArray();
+                char[] v2 = anotherEntry.surname.toCharArray();
+                int i = 0;
+                while (n-- != 0) {
+                    if (v1[i] != v2[i])
+                        return false;
+                    i++;
+                }
+                return true;
+            }
+        }
+        return false;
+    }
 }
 
