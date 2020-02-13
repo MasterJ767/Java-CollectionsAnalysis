@@ -9,13 +9,10 @@ public class FileOutput {
     }
 
     public void writeCSV(String location, ArrayList<Entry> records) throws IOException{
+        // Open CSV file, convert entries to strings and write them to the CSV file
         PrintWriter outFile = new PrintWriter(location);
-        String[] data = new String[records.size()];
-        for (int i = 0; i < records.size(); i++) {
-            data[i] = records.get(i).toString();
-        }
-        for (String record: data) {
-            outFile.println(record);
+        for (Entry record: records) {
+            outFile.println(record.toString());
         }
         outFile.close();
     }

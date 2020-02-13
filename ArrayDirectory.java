@@ -4,6 +4,7 @@ public class ArrayDirectory implements Directory {
     private Entry[] directory;
 
     public ArrayDirectory() {
+        // Construct an empty Array on initialisation of class
         directory = new Entry[0];
     }
 
@@ -135,13 +136,15 @@ public class ArrayDirectory implements Directory {
 
     @Override
     public List<Entry> toArrayList() {
+        // Copy contents of the directory to an ArrayList and return
         ArrayList<Entry> listDirectory = new ArrayList<>();
         Collections.addAll(listDirectory, directory);
         return listDirectory;
     }
 
     public String toString() {
+        // Return a String with the contents of the directory formatted into a table
         String[] titles = {"Surname", "Initials", "Extension"};
-        return TabularPrint.toTable(titles, toArrayList());
+        return TabularPrint.toTableString(titles, toArrayList());
     }
 }

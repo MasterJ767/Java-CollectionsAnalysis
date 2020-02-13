@@ -26,10 +26,12 @@ public class Entry {
     }
 
     public String toString() {
+        // Returns the attributes of the entry as a string in CSV format
         return String.format("%s,%s,%s", getSurname(), getInitials(), getExtension());
     }
 
     public String[] toArray(){
+        // Returns the attributes of the entry in an Array
         String[] array = new String[3];
         array[0] = getSurname();
         array[1] = getInitials();

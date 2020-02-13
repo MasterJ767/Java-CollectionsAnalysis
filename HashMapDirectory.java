@@ -5,12 +5,14 @@ public class HashMapDirectory implements Directory {
     private HashMap<String, Entry> extensionDirectory;
 
     public HashMapDirectory() {
+        // Construct two empty HashMaps on initialisation of class
         surnameDirectory = new HashMap<>();
         extensionDirectory = new HashMap<>();
     }
 
     @Override
     public void insertEntry (Entry entry) {
+        // Add entry to both HashMaps
         surnameDirectory.put(entry.getSurname(), entry);
         extensionDirectory.put(entry.getExtension(), entry);
     }
@@ -104,6 +106,7 @@ public class HashMapDirectory implements Directory {
 
     @Override
     public List<Entry> toArrayList() {
+        // Copy values from the surnameDirectory to an ArrayList and return
         ArrayList<Entry> listDirectory = new ArrayList<>();
         for (String key : surnameDirectory.keySet()) {
             listDirectory.add(surnameDirectory.get(key));
@@ -112,7 +115,8 @@ public class HashMapDirectory implements Directory {
     }
 
     public String toString() {
+        // Return a String with the contents of the directory formatted into a table
         String[] titles = {"Surname", "Initials", "Extension"};
-        return TabularPrint.toTable(titles, toArrayList());
+        return TabularPrint.toTableString(titles, toArrayList());
     }
 }

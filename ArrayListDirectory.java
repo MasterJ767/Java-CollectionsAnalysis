@@ -4,11 +4,13 @@ public class ArrayListDirectory implements Directory {
     private ArrayList<Entry> directory;
 
     public ArrayListDirectory() {
+        // Construct an empty ArrayList on initialisation of class
         directory = new ArrayList<>();
     }
 
     @Override
     public void insertEntry (Entry entry) {
+        // Add entry to the directory ArrayList
         directory.add(entry);
     }
 
@@ -104,11 +106,13 @@ public class ArrayListDirectory implements Directory {
 
     @Override
     public List<Entry> toArrayList() {
+        // The directory is already an ArrayList so no conversion is necessary
         return directory;
     }
 
     public String toString() {
+        // Return a String with the contents of the directory formatted into a table
         String[] titles = {"Surname", "Initials", "Extension"};
-        return TabularPrint.toTable(titles, directory);
+        return TabularPrint.toTableString(titles, directory);
     }
 }
