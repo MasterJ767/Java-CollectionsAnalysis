@@ -104,10 +104,15 @@ public class HashMapDirectory implements Directory {
 
     @Override
     public List<Entry> toArrayList() {
-        ArrayList<Entry> directory = new ArrayList<>();
+        ArrayList<Entry> listDirectory = new ArrayList<>();
         for (String key : surnameDirectory.keySet()) {
-            directory.add(surnameDirectory.get(key));
+            listDirectory.add(surnameDirectory.get(key));
         }
-        return directory;
+        return listDirectory;
+    }
+
+    public String toString() {
+        String[] titles = {"Surname", "Initials", "Extension"};
+        return TabularPrint.toTable(titles, toArrayList());
     }
 }

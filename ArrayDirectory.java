@@ -135,6 +135,13 @@ public class ArrayDirectory implements Directory {
 
     @Override
     public List<Entry> toArrayList() {
-        return Arrays.asList(directory);
+        ArrayList<Entry> listDirectory = new ArrayList<>();
+        Collections.addAll(listDirectory, directory);
+        return listDirectory;
+    }
+
+    public String toString() {
+        String[] titles = {"Surname", "Initials", "Extension"};
+        return TabularPrint.toTable(titles, toArrayList());
     }
 }

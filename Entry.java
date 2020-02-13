@@ -29,6 +29,10 @@ public class Entry {
         return String.format("%s,%s,%s", getSurname(), getInitials(), getExtension());
     }
 
+    String toStringTabular() {
+        return String.format("¦ %-15s ¦ %-9s ¦ %9s ¦\n", getSurname(), getInitials(), getExtension());
+    }
+
     public boolean equals(Object anObject) {
         if (this == anObject) {
             return true;
