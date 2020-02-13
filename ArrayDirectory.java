@@ -23,7 +23,7 @@ public class ArrayDirectory implements Directory {
     }
 
     @Override
-    public void deleteEntryUsingName(String surname) throws EmptyDirectoryException{
+    public void deleteEntryUsingName(String surname) {
         // Throw an error if there is an attempt to remove an entry from an empty directory
         if (directory.length == 0) {
             throw new EmptyDirectoryException("An attempt to remove an entry from an empty directory was made.");
@@ -49,17 +49,16 @@ public class ArrayDirectory implements Directory {
             }
             // If the given surname cannot be found within the directory throw an error
             try {
-                throw new SurnameNotFoundException(String.format("The surname %s could not be found in the directory, therefore it was not deleted", surname));
+                throw new SurnameNotFoundException(String.format("The surname %s could not be found in this ArrayDirectory, nothing was deleted", surname));
             }
             catch(SurnameNotFoundException e) {
                 System.out.println(e.getMessage());
-                e.printStackTrace();
             }
         }
     }
 
     @Override
-    public void deleteEntryUsingExtension(String number) throws EmptyDirectoryException{
+    public void deleteEntryUsingExtension(String number){
         // Throw an error if there is an attempt to remove an entry from an empty directory
         if (directory.length == 0) {
             throw new EmptyDirectoryException("An attempt to remove an entry from an empty directory was made.");
@@ -85,11 +84,10 @@ public class ArrayDirectory implements Directory {
             }
             // If the given extension cannot be found within the directory throw an error
             try {
-                throw new ExtensionNotFoundException(String.format("The extension %s could not be found in the directory, therefore it was not deleted", number));
+                throw new ExtensionNotFoundException(String.format("The extension %s could not be found in this ArrayDirectory, nothing was deleted", number));
             }
             catch(ExtensionNotFoundException e) {
                 System.out.println(e.getMessage());
-                e.printStackTrace();
             }
         }
     }
@@ -106,11 +104,10 @@ public class ArrayDirectory implements Directory {
         }
         // If the given surname cannot be found within the directory throw an error
         try {
-            throw new SurnameNotFoundException(String.format("The surname %s could not be found in the directory, therefore no extensions were updated", surname));
+            throw new SurnameNotFoundException(String.format("The surname %s could not be found in this ArrayDirectory, nothing was updated", surname));
         }
         catch(SurnameNotFoundException e) {
             System.out.println(e.getMessage());
-            e.printStackTrace();
         }
     }
 
@@ -125,11 +122,10 @@ public class ArrayDirectory implements Directory {
         }
         // If the given surname cannot be found within the directory throw an error
         try {
-            throw new SurnameNotFoundException(String.format("The surname %s could not be found in the directory", surname));
+            throw new SurnameNotFoundException(String.format("The surname %s could not be found in this ArrayDirectory", surname));
         }
         catch(SurnameNotFoundException e) {
             System.out.println(e.getMessage());
-            e.printStackTrace();
             return null;
         }
     }

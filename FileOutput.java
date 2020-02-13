@@ -8,7 +8,7 @@ public class FileOutput {
         return (file.exists()  && file.canWrite());
     }
 
-    public void writeCSV(String location, ArrayList<Entry> records) throws IOException{
+    public static void writeCSV(String location, List<Entry> records) throws IOException{
         // Open CSV file, convert entries to strings and write them to the CSV file
         PrintWriter outFile = new PrintWriter(location);
         for (Entry record: records) {
