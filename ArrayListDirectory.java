@@ -1,6 +1,6 @@
 import java.util.*;
 
-public abstract class ArrayListDirectory implements Directory {
+public class ArrayListDirectory implements Directory {
     private ArrayList<Entry> directory;
 
     public ArrayListDirectory() {
@@ -105,5 +105,30 @@ public abstract class ArrayListDirectory implements Directory {
     @Override
     public List<Entry> toArrayList() {
         return directory;
+    }
+
+    public String toString() {
+        StringBuilder horizontal = new StringBuilder();
+        String dash = "-";
+        horizontal.ensureCapacity(32);
+        horizontal.append("+");
+        horizontal.append(dash.repeat(15));
+        horizontal.append("+");
+        horizontal.append(dash.repeat(9));
+        horizontal.append("+");
+        horizontal.append(dash.repeat(5));
+        horizontal.append("+");
+
+        StringBuilder title = new StringBuilder();
+        String[] titles = {"Surname", "Initials", "Extension"};
+        title.ensureCapacity(32);
+        title.append(String.format("|%15s|%9s|%5s|", titles[0], titles[1], titles[2]));
+
+        StringBuilder directory = new StringBuilder();
+        directory.append(horizontal);
+        directory.append(titles);
+        directory.append(horizontal);
+
+        return directory.toString();
     }
 }

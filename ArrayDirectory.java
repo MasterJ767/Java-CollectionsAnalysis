@@ -1,6 +1,6 @@
 import java.util.*;
 
-public abstract class ArrayDirectory implements Directory {
+public class ArrayDirectory implements Directory {
     private Entry[] directory;
 
     public ArrayDirectory() {
