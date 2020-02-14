@@ -24,9 +24,12 @@ public class Cli {
                 }
                 System.out.println(String.format("%d, %d", cleanData.length, records.length));*/
 
-        /*Directory directory = createDirectory(FileInput.readCSV("test_data.csv"), 2);
+        Directory directory = createDirectory(FileInput.readCSV("test.csv"), 2);
         System.out.println(directory.toString());
-        FileOutput.writeCSV("output_data.csv", directory.toArrayList());*/
+        directory.updateExtensionUsingName("Mayow","84715");
+        System.out.println(directory.toString());
+
+        //FileOutput.writeCSV("output_data.csv", directory.toArrayList());
     }
 
     public static Directory createDirectory(ArrayList<String[]> data, int variant) {
@@ -40,7 +43,7 @@ public class Cli {
         }
 
         // Remove duplicate Entry Objects
-        Entry[] cleanData = (Entry[]) removeDuplicates(records);
+        Entry[] cleanData = removeDuplicates(records);
 
         // Depending on code passed to the function, instantiate a Directory subclass object
         if (variant == 0) {
@@ -60,14 +63,18 @@ public class Cli {
         return newDirectory;
     }
 
-    private static Object[] removeDuplicates(Entry[] data) {
+    private static Entry[] removeDuplicates(Entry[] data) {
         ArrayList<Entry> cleanData = new ArrayList<>();
         for (Entry entry: data) {
             if (!(cleanData.contains(entry))) {
                 cleanData.add(entry);
             }
         }
+        Entry[] cleanDataArray = new Entry[cleanData.size()];
+        for (int i = 0; i < cleanData.size(); i++) {
+            cleanDataArray[i] = cleanData.get(i);
+        }
 
-        return cleanData.toArray();
+        return cleanDataArray;
     }
 }

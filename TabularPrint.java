@@ -5,24 +5,24 @@ public class TabularPrint {
         // Build the horizontal borders of the table
         String[] horizontal = new String[3];
         String dash = "-";
-        horizontal[0] = dash.repeat(17);
-        horizontal[1] = dash.repeat(11);
-        horizontal[2] = dash.repeat(11);
+        horizontal[0] = dash.repeat(15);
+        horizontal[1] = dash.repeat(9);
+        horizontal[2] = dash.repeat(9);
 
         // Build table
         StringBuilder table = new StringBuilder();
         // Add border row to table
-        table.append(toTableRow(horizontal, "+","+","+"));
+        table.append(toTableRow(horizontal, "+-","-+-","-+"));
         // Add title row to table
         table.append(toTableRow(titles, "¦ "," ¦ "," ¦"));
         // Add border row to table
-        table.append(toTableRow(horizontal, "+","+","+"));
+        table.append(toTableRow(horizontal, "+-","-+-","-+"));
         // Add entry rows to table
         for (Entry entry: records) {
             table.append(toTableRow(entry.toArray(), "¦ "," ¦ "," ¦"));
         }
         // Add border row to table
-        table.append(toTableRow(horizontal, "+","+","+"));
+        table.append(toTableRow(horizontal, "+-","-+-","-+"));
 
         // Return table as a long string
         return table.toString();
