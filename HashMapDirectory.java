@@ -25,19 +25,19 @@ public class HashMapDirectory implements Directory {
         } else {
             // Find entry which contains the given surname
             if (surnameDirectory.containsKey(surname)) {
-                // Remove entry from the directory where the surnames are the keys
-                surnameDirectory.remove(surname);
                 // Find entry which contains the given surname and extract its associated extension
                 String number = surnameDirectory.get(surname).getExtension();
+                // Remove entry from the directory where the surnames are the keys
+                surnameDirectory.remove(surname);
                 // Remove entry from the directory where the extensions are the keys
                 extensionDirectory.remove(number);
-            }
-            // If the given surname cannot be found within the directory throw an error
-            try {
-                throw new SurnameNotFoundException(String.format("The surname %s could not be found in this HashMapDirectory, nothing was deleted", surname));
-            }
-            catch(SurnameNotFoundException e) {
-                System.out.println(e.getMessage());
+            } else {
+                // If the given surname cannot be found within the directory throw an error
+                try {
+                    throw new SurnameNotFoundException(String.format("The surname %s could not be found in this HashMapDirectory, nothing was deleted", surname));
+                } catch (SurnameNotFoundException e) {
+                    System.out.println(e.getMessage());
+                }
             }
         }
     }
@@ -45,24 +45,24 @@ public class HashMapDirectory implements Directory {
     @Override
     public void deleteEntryUsingExtension(String number) {
         // Throw an error if there is an attempt to remove an entry from an empty directory
-        if (surnameDirectory.size() == 0) {
+        if (extensionDirectory.size() == 0) {
             throw new EmptyDirectoryException("An attempt to remove an entry from an empty directory was made.");
         } else {
             // Find entry which contains the given extension
             if (extensionDirectory.containsKey(number)) {
+                // Find entry which contains the given extension and extract its associated surname
+                String surname = extensionDirectory.get(number).getSurname();
                 // Remove entry from the directory where the extensions are the keys
                 extensionDirectory.remove(number);
-                // Find entry which contains the given extension and extract its associated surname
-                String surname = surnameDirectory.get(number).getSurname();
                 // Remove entry from the directory where the surnames are the keys
                 surnameDirectory.remove(surname);
-            }
-            // If the given extension cannot be found within the directory throw an error
-            try {
-                throw new ExtensionNotFoundException(String.format("The extension %s could not be found in this HashMapDirectory, nothing was deleted", number));
-            }
-            catch(ExtensionNotFoundException e) {
-                System.out.println(e.getMessage());
+            } else {
+                // If the given extension cannot be found within the directory throw an error
+                try {
+                    throw new ExtensionNotFoundException(String.format("The extension %s could not be found in this HashMapDirectory, nothing was deleted", number));
+                } catch (ExtensionNotFoundException e) {
+                    System.out.println(e.getMessage());
+                }
             }
         }
     }
@@ -73,6 +73,7 @@ public class HashMapDirectory implements Directory {
             // Tell the user the new extension is of illegal length
             throw new IllegalExtensionException(String.format("The extension %s is of length %d. Extensions should be of length 5.", newNumber, newNumber.length()));
         } else {
+            boolean found = false;
             // Find entry which contains the given surname
             if (surnameDirectory.containsKey(surname)) {
                 // Change extension information

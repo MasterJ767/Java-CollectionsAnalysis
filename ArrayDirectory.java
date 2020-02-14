@@ -28,6 +28,7 @@ public class ArrayDirectory implements Directory {
         if (directory.length == 0) {
             throw new EmptyDirectoryException("An attempt to remove an entry from an empty directory was made.");
         } else {
+            boolean found = false;
             // Obtain length of current array
             int currentLength = directory.length;
             // Create new directory which is 1 smaller in length
@@ -44,15 +45,18 @@ public class ArrayDirectory implements Directory {
                     }
                     // Change the reference of this.directory to the new array
                     directory = newDirectory;
+                    found = true;
                     break;
                 }
+                found = false;
             }
-            // If the given surname cannot be found within the directory throw an error
-            try {
-                throw new SurnameNotFoundException(String.format("The surname %s could not be found in this ArrayDirectory, nothing was deleted", surname));
-            }
-            catch(SurnameNotFoundException e) {
-                System.out.println(e.getMessage());
+            if (!found) {
+                // If the given surname cannot be found within the directory throw an error
+                try {
+                    throw new SurnameNotFoundException(String.format("The surname %s could not be found in this ArrayDirectory, nothing was deleted", surname));
+                } catch (SurnameNotFoundException e) {
+                    System.out.println(e.getMessage());
+                }
             }
         }
     }
@@ -63,6 +67,7 @@ public class ArrayDirectory implements Directory {
         if (directory.length == 0) {
             throw new EmptyDirectoryException("An attempt to remove an entry from an empty directory was made.");
         } else {
+            boolean found = false;
             // Obtain length of current array
             int currentLength = directory.length;
             // Create new directory which is 1 smaller in length
@@ -79,15 +84,18 @@ public class ArrayDirectory implements Directory {
                     }
                     // Change the reference of this.directory to the new array
                     directory = newDirectory;
+                    found = true;
                     break;
                 }
+                found = false;
             }
-            // If the given extension cannot be found within the directory throw an error
-            try {
-                throw new ExtensionNotFoundException(String.format("The extension %s could not be found in this ArrayDirectory, nothing was deleted", number));
-            }
-            catch(ExtensionNotFoundException e) {
-                System.out.println(e.getMessage());
+            if (!found) {
+                // If the given extension cannot be found within the directory throw an error
+                try {
+                    throw new ExtensionNotFoundException(String.format("The extension %s could not be found in this ArrayDirectory, nothing was deleted", number));
+                } catch (ExtensionNotFoundException e) {
+                    System.out.println(e.getMessage());
+                }
             }
         }
     }
@@ -98,19 +106,24 @@ public class ArrayDirectory implements Directory {
             // Tell the user the new extension is of illegal length
             throw new IllegalExtensionException(String.format("The extension %s is of length %d. Extensions should be of length 5.", newNumber, newNumber.length()));
         } else {
+            boolean found = false;
             // Find entry which contains the given surname
             for (Entry entry : directory) {
                 if (entry.getSurname().equals(surname)) {
                     // Change extension information
                     entry.setExtension(newNumber);
+                    found = true;
                     break;
                 }
+                found = false;
             }
-            // If the given surname cannot be found within the directory throw an error
-            try {
-                throw new SurnameNotFoundException(String.format("The surname %s could not be found in this ArrayDirectory, nothing was updated", surname));
-            } catch (SurnameNotFoundException e) {
-                System.out.println(e.getMessage());
+            if (!found) {
+                // If the given surname cannot be found within the directory throw an error
+                try {
+                    throw new SurnameNotFoundException(String.format("The surname %s could not be found in this ArrayDirectory, nothing was updated", surname));
+                } catch (SurnameNotFoundException e) {
+                    System.out.println(e.getMessage());
+                }
             }
         }
     }

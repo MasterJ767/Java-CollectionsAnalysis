@@ -26,7 +26,13 @@ public class Cli {
 
         Directory directory = createDirectory(FileInput.readCSV("test.csv"), 2);
         System.out.println(directory.toString());
-        directory.updateExtensionUsingName("Mayow","84715");
+        directory.deleteEntryUsingExtension("88875");
+        System.out.println(directory.toString());
+        directory.deleteEntryUsingName("Prott");
+        System.out.println(directory.toString());
+        directory.deleteEntryUsingExtension("68875");
+        System.out.println(directory.toString());
+        directory.deleteEntryUsingName("Gaunter");
         System.out.println(directory.toString());
 
         //FileOutput.writeCSV("output_data.csv", directory.toArrayList());
