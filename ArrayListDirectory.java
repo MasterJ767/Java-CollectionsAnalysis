@@ -10,8 +10,11 @@ public class ArrayListDirectory implements Directory {
 
     @Override
     public void insertEntry (Entry entry) {
-        // Add entry to the directory ArrayList
-        directory.add(entry);
+        // Insert new entry to the directory if doesn't already exist in the directory
+        if (!(directory.contains(entry))) {
+            // Add entry to the directory ArrayList
+            directory.add(entry);
+        }
     }
 
     @Override

@@ -1,44 +1,35 @@
-import java.io.IOException;
+import java.io.*;
 import java.util.*;
+import javax.swing.*;
 
 public class Cli {
     public static void main(String[] args) throws IOException {
-        // ArrayList<String> directory = FileInput.readCSVDebug("test_data.csv");
+        Entry newEntry = new Entry("Prott", "A.B", "12345");
+        ArrayList<String[]> data = FileInput.readCSV("test.csv");
+        Directory directory2 = createDirectory(data, 2);
+        System.out.println(directory2.toString());
+        directory2.insertEntry(newEntry);
+        System.out.println(directory2.toString());
+        /*directory2.deleteEntryUsingName("Prott");
+        System.out.println(directory2.toString());*/
+        Directory directory1 = createDirectory(data, 1);
+        System.out.println(directory1.toString());
+        directory1.insertEntry(newEntry);
+        System.out.println(directory1.toString());
+        /*directory1.deleteEntryUsingName("Prott");
+        System.out.println(directory1.toString());*/
+        Directory directory = createDirectory(data, 0);
+        System.out.println(directory.toString());
+        directory.insertEntry(newEntry);
+        System.out.println(directory.toString());
+        /*directory.deleteEntryUsingName("Prott");
+        System.out.println(directory.toString());*/
 
-                /*ArrayList<String[]> directory = FileInput.readCSV("test_data.csv");
-                Entry[] records = new Entry[directory.size()];
-                // Convert String Arrays to Entry Objects
-                for (int i = 0; i < directory.size(); i++) {
-                    Entry entry = new Entry(directory.get(i)[0], directory.get(i)[1], directory.get(i)[2]);
-                    records[i] = entry;
-                }
-                // Remove duplicate Entry Objects
-                Object[] cleanData = removeDuplicates(records);
-                String[] printable = new String[cleanData.length];
-                for (int i = 0; i < cleanData.length; i++) {
-                    printable[i] = cleanData[i].toString();
-                }
-                Arrays.sort(printable);
-                for (Object item: printable) {
-                    System.out.println(item.toString());
-                }
-                System.out.println(String.format("%d, %d", cleanData.length, records.length));*/
-
-        Directory directory = createDirectory(FileInput.readCSV("test.csv"), 2);
-        System.out.println(directory.toString());
-        directory.deleteEntryUsingExtension("88875");
-        System.out.println(directory.toString());
-        directory.deleteEntryUsingName("Prott");
-        System.out.println(directory.toString());
-        directory.deleteEntryUsingExtension("68875");
-        System.out.println(directory.toString());
-        directory.deleteEntryUsingName("Gaunter");
-        System.out.println(directory.toString());
 
         //FileOutput.writeCSV("output_data.csv", directory.toArrayList());
     }
 
-    public static Directory createDirectory(ArrayList<String[]> data, int variant) {
+    private static Directory createDirectory(ArrayList<String[]> data, int variant) {
         // Initialise a Directory and an Array of entries
         Directory newDirectory;
         Entry[] records = new Entry[data.size()];
@@ -82,5 +73,17 @@ public class Cli {
         }
 
         return cleanDataArray;
+    }
+
+    private static FileReader chooseFile() throws IOException {
+        JFileChooser chooser = new JFileChooser();
+        FileReader in;
+        if (chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
+            File selectedFile = chooser.getSelectedFile();
+            in = new FileReader(selectedFile);
+        } else {
+            in = null;
+        }
+        return in;
     }
 }

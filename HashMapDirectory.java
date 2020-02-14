@@ -25,12 +25,11 @@ public class HashMapDirectory implements Directory {
         } else {
             // Find entry which contains the given surname
             if (surnameDirectory.containsKey(surname)) {
-                // Find entry which contains the given surname and extract its associated extension
-                String number = surnameDirectory.get(surname).getExtension();
+                // Remove entry from the directory where the extensions are the keys
+                extensionDirectory.remove(surnameDirectory.get(surname).getExtension());
                 // Remove entry from the directory where the surnames are the keys
                 surnameDirectory.remove(surname);
-                // Remove entry from the directory where the extensions are the keys
-                extensionDirectory.remove(number);
+
             } else {
                 // If the given surname cannot be found within the directory throw an error
                 try {
@@ -50,12 +49,10 @@ public class HashMapDirectory implements Directory {
         } else {
             // Find entry which contains the given extension
             if (extensionDirectory.containsKey(number)) {
-                // Find entry which contains the given extension and extract its associated surname
-                String surname = extensionDirectory.get(number).getSurname();
+                // Remove entry from the directory where the surnames are the keys
+                surnameDirectory.remove(extensionDirectory.get(number).getSurname());
                 // Remove entry from the directory where the extensions are the keys
                 extensionDirectory.remove(number);
-                // Remove entry from the directory where the surnames are the keys
-                surnameDirectory.remove(surname);
             } else {
                 // If the given extension cannot be found within the directory throw an error
                 try {
@@ -76,6 +73,9 @@ public class HashMapDirectory implements Directory {
             boolean found = false;
             // Find entry which contains the given surname
             if (surnameDirectory.containsKey(surname)) {
+                // Update extensionDirectory keys by deleting old k,v pair and reinserting entry with new extension as the key
+                extensionDirectory.remove(surnameDirectory.get(surname).getExtension());
+                extensionDirectory.put(newNumber, surnameDirectory.get(surname));
                 // Change extension information
                 surnameDirectory.get(surname).setExtension(newNumber);
             } else {
@@ -108,12 +108,8 @@ public class HashMapDirectory implements Directory {
 
     @Override
     public List<Entry> toArrayList() {
-        // Copy values from the surnameDirectory to an ArrayList and return
-        ArrayList<Entry> listDirectory = new ArrayList<>();
-        for (String key : surnameDirectory.keySet()) {
-            listDirectory.add(surnameDirectory.get(key));
-        }
-        return listDirectory;
+        // Convert directory values to a new array list and return
+        return new ArrayList<>(surnameDirectory.values());
     }
 
     public String toString() {

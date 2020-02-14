@@ -10,16 +10,19 @@ public class ArrayDirectory implements Directory {
 
     @Override
     public void insertEntry (Entry entry) {
-        // Obtain length of current directory
-        int currentLength = directory.length;
-        // Create new directory which is 1 greater in length
-        Entry[] newDirectory = new Entry[currentLength + 1];
-        // Copy the contents of the old array to the new array
-        System.arraycopy(directory, 0, newDirectory, 0, currentLength);
-        // Add the new entry to the end
-        newDirectory[currentLength] = entry;
-        // Change the reference of this.directory to the new array
-        directory = newDirectory;
+        // Insert new entry to the directory if doesn't already exist in the directory
+        if (!(Arrays.asList(directory).contains(entry))) {
+            // Obtain length of current directory
+            int currentLength = directory.length;
+            // Create new directory which is 1 greater in length
+            Entry[] newDirectory = new Entry[currentLength + 1];
+            // Copy the contents of the old array to the new array
+            System.arraycopy(directory, 0, newDirectory, 0, currentLength);
+            // Add the new entry to the end
+            newDirectory[currentLength] = entry;
+            // Change the reference of this.directory to the new array
+            directory = newDirectory;
+        }
     }
 
     @Override

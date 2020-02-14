@@ -4,9 +4,14 @@ public class Entry {
     private String extension;
 
     public Entry(String surname, String initials, String extension) {
-        this.surname = surname;
-        this.initials = initials;
-        this.extension = extension;
+        if (extension.length() != 5) {
+            // Tell the user which record is causing the issue and the location of the file causing the issue
+            throw new IllegalExtensionException(String.format("The extension %s is of length %d. Extensions should be of length 5.", extension, extension.length()));
+        } else {
+            this.surname = surname;
+            this.initials = initials;
+            this.extension = extension;
+        }
     }
 
     public String getSurname() {
@@ -22,7 +27,12 @@ public class Entry {
     }
 
     public void setExtension(String extension) {
-        this.extension = extension;
+        if (extension.length() != 5) {
+            // Tell the user which record is causing the issue and the location of the file causing the issue
+            throw new IllegalExtensionException(String.format("The extension %s is of length %d. Extensions should be of length 5.", extension, extension.length()));
+        } else {
+            this.extension = extension;
+        }
     }
 
     public String toString() {
@@ -45,18 +55,8 @@ public class Entry {
         }
         if (anObject instanceof Entry) {
             Entry anotherEntry = (Entry) anObject;
-            int n = surname.length();
-            if (n == anotherEntry.surname.length()) {
-                char[] v1 = surname.toCharArray();
-                char[] v2 = anotherEntry.surname.toCharArray();
-                int i = 0;
-                while (n-- != 0) {
-                    if (v1[i] != v2[i])
-                        return false;
-                    i++;
-                }
-                return true;
-            }
+            // Compare the surnames of the two entries, if they are the same return true
+            return this.surname.equals(anotherEntry.surname);
         }
         return false;
     }
