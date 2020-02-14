@@ -55,21 +55,26 @@ public class TabularPrint {
         return table;
     }
 
+    /**
+     * Return a row of a table as a string
+     *
+     * Table rows are formatted as follows:
+     * Left Separator, String of arbitrary length
+     * Cell 1, Left-aligned String which can occupy up to 15 characters
+     * Middle Separator, String of arbitrary length
+     * Cell 2, Left-aligned String which can occupy up to 9 characters
+     * Middle Separator, String of arbitrary length
+     * Cell 3, Right-aligned String which can occupy up to 9 characters
+     * Right Separator, String of arbitrary length
+     *
+     * @param values an array containing the values of the cells in the table row
+     * @param leftSeparator a string specifying the characters which form the leftmost border of the table row
+     * @param middleSeparator a string specifying the characters which form the internal borders of the table row
+     * @param rightSeparator a string specifying the characters which form the rightmost border of the table row
+     *
+     * If strings are too long for their cell, the table still prints but it doesn't retain its neat formatting
+     */
     private static String toTableRow(String[] values, String leftSeparator, String middleSeparator, String rightSeparator) {
-        /*
-        Format table rows
-
-        Table rows are formatted as follows:
-        Left Separator, String of arbitrary length
-        Cell 1, Left-aligned String which can occupy up to 15 characters
-        Middle Separator, String of arbitrary length
-        Cell 2, Left-aligned String which can occupy up to 9 characters
-        Middle Separator, String of arbitrary length
-        Cell 3, Right-aligned String which can occupy up to 9 characters
-        Right Separator, String of arbitrary length
-
-        If strings are too long for their cell, the table still prints but it doesn't retain its neat formatting
-         */
         return String.format("%1$s%2$-15s%3$s%4$-9s%3$s%5$9s%6$s\n",leftSeparator, values[0], middleSeparator, values[1], values[2], rightSeparator);
     }
 }

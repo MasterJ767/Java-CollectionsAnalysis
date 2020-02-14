@@ -1,6 +1,5 @@
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.*;
 
 public class Cli {
     public static void main(String[] args) throws IOException {
@@ -24,7 +23,7 @@ public class Cli {
                     System.out.println(item.toString());
                 }
                 System.out.println(String.format("%d, %d", cleanData.length, records.length));*/
-                
+
         /*Directory directory = createDirectory(FileInput.readCSV("test_data.csv"), 2);
         System.out.println(directory.toString());
         FileOutput.writeCSV("output_data.csv", directory.toArrayList());*/
