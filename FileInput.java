@@ -4,11 +4,11 @@ import javax.swing.*;
 import javax.swing.filechooser.*;
 
 public class FileInput {
-    private static ArrayList<String[]> readCSV(File location) throws IOException {
+    private static ArrayList<Entry> readCSV(File location) throws IOException {
         // Convert CSV entries into records
         BufferedReader inFile = new BufferedReader(new FileReader(location));
         String row;
-        ArrayList<String[]> records = new ArrayList<>();
+        ArrayList<Entry> records = new ArrayList<>();
         while ((row = inFile.readLine()) != null) {
             // Split lines from the file about the ',' character and place the line parts in a String Array
             String[] data = row.split(",");
@@ -17,22 +17,18 @@ public class FileInput {
                 // Tell the user which record is causing the issue and the location of the file causing the issue
                 throw new IllegalFormatException(String.format("The record %s is incorrectly formatted. It should take the form: 'surname,initials,extension' where the extension is 5 characters long. See '%s' to rectify this issue.", row, location.getName()));
             }
-            // Throw error if extension is not 5 characters long
-            if (data[2].length() != 5) {
-                // Tell the user which record is causing the issue and the location of the file causing the issue
-                throw new IllegalExtensionException(String.format("The extension %1$s is of length %2$d. Extensions should be of length 5, see entry '%3$s,%4$s,%1$s' in '%5$s' to rectify this issue.", data[2], data[2].length(), data[0], data[1], location.getName()));
-            }
-            // Add the String Array to an ArrayList
-            records.add(data);
+            Entry entry = new Entry(data[0], data[1], data[2]);
+            // Add the Entry to an ArrayList
+            records.add(entry);
         }
         inFile.close();
         // Return the ArrayList
         return records;
     }
 
-    static ArrayList<String[]> convertRecords(String[] args) {
+    static ArrayList<Entry> convertRecords(String[] args) {
         // Convert command line entries into records
-        ArrayList<String[]> records = new ArrayList<>();
+        ArrayList<Entry> records = new ArrayList<>();
         for (String element: args) {
             String[] data = element.split(",");
             // Throw error if record does not split into three parts
@@ -40,19 +36,15 @@ public class FileInput {
                 // Tell the user which record is causing the issue and that the issue is at the command line
                 throw new IllegalFormatException(String.format("The record %s is incorrectly formatted. It should take the form: 'surname,initials,extension' where the extension is 5 characters long. See the command line to rectify this issue.", element));
             }
-            // Throw error if extension is not 5 characters long
-            if (data[2].length() != 5) {
-                // Tell the user which record is causing the issue and that the issue is at the command line
-                throw new IllegalExtensionException(String.format("The extension %1$s is of length %2$d. Extensions should be of length 5, see entry '%3$s,%4$s,%1$s' from command line to rectify this issue.", data[2], data[2].length(), data[0], data[1]));
-            }
-            // Add the String Array to an ArrayList
-            records.add(data);
+            Entry entry = new Entry(data[0], data[1], data[2]);
+            // Add the Entry to an ArrayList
+            records.add(entry);
         }
         // Return the ArrayList
         return records;
     }
 
-    static ArrayList<String[]> userInput() throws IOException {
+    static ArrayList<Entry> userInput() throws IOException {
         // Initialise file choosing objects, in case it is necessary to use them later
         JFileChooser chooser = new JFileChooser();
         chooser.setFileFilter(new FileNameExtensionFilter("COMMA SEPARATED VALUES FILE (*.csv)", ".csv", "csv"));

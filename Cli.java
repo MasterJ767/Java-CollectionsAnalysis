@@ -4,12 +4,12 @@ import java.util.*;
 public class Cli {
     public static void main(String[] args) throws IOException {
         // Convert records from the command line configuration into a format ready to be inserted into the directory
-        ArrayList<String[]> data = FileInput.convertRecords(args);
+        ArrayList<Entry> data = FileInput.convertRecords(args);
         // Collect records from an input csv file and add to command line configuration records
         data.addAll(FileInput.userInput());
 
-        for (String[] entry: data) {
-            System.out.println(String.format("%s,%s,%s", entry[0], entry[1], entry[2]));
+        for (Entry entry: data) {
+            System.out.println(entry.toString());
         }
 
 
@@ -33,18 +33,12 @@ public class Cli {
         System.out.println(directory.toString());*/
     }
 
-    private static Directory createDirectory(ArrayList<String[]> data, int variant) {
+    private static Directory createDirectory(ArrayList<Entry> dirtyData, int variant) {
         // Initialise a Directory and an Array of entries
         Directory newDirectory;
-        Entry[] records = new Entry[data.size()];
-        // Convert String Arrays to Entry Objects
-        for (int i = 0; i < data.size(); i++) {
-            Entry entry = new Entry(data.get(i)[0], data.get(i)[1], data.get(i)[2]);
-            records[i] = entry;
-        }
 
         // Remove duplicate Entry Objects
-        Entry[] cleanData = removeDuplicates(records);
+        ArrayList<Entry> cleanData = removeDuplicates(dirtyData);
 
         // Depending on code passed to the function, instantiate a Directory subclass object
         if (variant == 0) {
@@ -64,18 +58,13 @@ public class Cli {
         return newDirectory;
     }
 
-    private static Entry[] removeDuplicates(Entry[] data) {
+    private static ArrayList<Entry> removeDuplicates(ArrayList<Entry> dirtyData) {
         ArrayList<Entry> cleanData = new ArrayList<>();
-        for (Entry entry: data) {
+        for (Entry entry: dirtyData) {
             if (!(cleanData.contains(entry))) {
                 cleanData.add(entry);
             }
         }
-        Entry[] cleanDataArray = new Entry[cleanData.size()];
-        for (int i = 0; i < cleanData.size(); i++) {
-            cleanDataArray[i] = cleanData.get(i);
-        }
-
-        return cleanDataArray;
+        return cleanData;
     }
 }
