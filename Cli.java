@@ -11,9 +11,15 @@ public class Cli {
         // Put records into An ArrayListDirectory
         Directory directory = createDirectory(data,1);
 
+        // Print contents of directory as a table to screen
         System.out.println(directory.toString());
 
+        // Write records to an output csv file
         FileOutput.userOutput(directory.toArrayList());
+
+        StopWatch timer = new StopWatch();
+
+
     }
 
     private static Directory createDirectory(ArrayList<Entry> dirtyData, int variant) {

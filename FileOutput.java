@@ -3,7 +3,7 @@ import java.util.*;
 import javax.swing.*;
 import javax.swing.filechooser.*;
 
-public class FileOutput {
+class FileOutput {
     private static void writeCSV(File location, List<Entry> records) throws IOException{
         // Open CSV file, convert entries to strings and write them to the CSV file
         PrintWriter outFile = new PrintWriter(location);

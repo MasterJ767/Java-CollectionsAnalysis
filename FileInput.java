@@ -3,7 +3,7 @@ import java.util.*;
 import javax.swing.*;
 import javax.swing.filechooser.*;
 
-public class FileInput {
+class FileInput {
     private static ArrayList<Entry> readCSV(File location) throws IOException {
         // Convert CSV entries into records
         BufferedReader inFile = new BufferedReader(new FileReader(location));
