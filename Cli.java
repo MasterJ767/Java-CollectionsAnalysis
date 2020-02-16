@@ -1,32 +1,36 @@
 import java.io.*;
 import java.util.*;
-import javax.swing.*;
 
 public class Cli {
     public static void main(String[] args) throws IOException {
-        Entry newEntry = new Entry("Prott", "A.B", "12345");
-        ArrayList<String[]> data = FileInput.readCSV("test.csv");
-        Directory directory2 = createDirectory(data, 2);
+        // Convert records from the command line configuration into a format ready to be inserted into the directory
+        ArrayList<String[]> data = FileInput.convertRecords(args);
+        // Collect records from an input csv file and add to command line configuration records
+        data.addAll(FileInput.userInput());
+
+        for (String[] entry: data) {
+            System.out.println(String.format("%s,%s,%s", entry[0], entry[1], entry[2]));
+        }
+
+
+        /*Directory directory2 = createDirectory(data, 2);
         System.out.println(directory2.toString());
         directory2.insertEntry(newEntry);
         System.out.println(directory2.toString());
-        /*directory2.deleteEntryUsingName("Prott");
-        System.out.println(directory2.toString());*/
+        *//*directory2.deleteEntryUsingName("Prott");
+        System.out.println(directory2.toString());*//*
         Directory directory1 = createDirectory(data, 1);
         System.out.println(directory1.toString());
         directory1.insertEntry(newEntry);
         System.out.println(directory1.toString());
-        /*directory1.deleteEntryUsingName("Prott");
-        System.out.println(directory1.toString());*/
+        *//*directory1.deleteEntryUsingName("Prott");
+        System.out.println(directory1.toString());*//*
         Directory directory = createDirectory(data, 0);
         System.out.println(directory.toString());
         directory.insertEntry(newEntry);
-        System.out.println(directory.toString());
+        System.out.println(directory.toString());*/
         /*directory.deleteEntryUsingName("Prott");
         System.out.println(directory.toString());*/
-
-
-        //FileOutput.writeCSV("output_data.csv", directory.toArrayList());
     }
 
     private static Directory createDirectory(ArrayList<String[]> data, int variant) {
@@ -73,17 +77,5 @@ public class Cli {
         }
 
         return cleanDataArray;
-    }
-
-    private static FileReader chooseFile() throws IOException {
-        JFileChooser chooser = new JFileChooser();
-        FileReader in;
-        if (chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
-            File selectedFile = chooser.getSelectedFile();
-            in = new FileReader(selectedFile);
-        } else {
-            in = null;
-        }
-        return in;
     }
 }
