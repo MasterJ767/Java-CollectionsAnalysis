@@ -28,33 +28,6 @@ public class TabularPrint {
         return table.toString();
     }
 
-    public static String[] toTableArray(String[] titles, List<Entry> records) {
-        // Build the horizontal borders of the table
-        String[] horizontal = new String[3];
-        String dash = "-";
-        horizontal[0] = dash.repeat(15);
-        horizontal[1] = dash.repeat(9);
-        horizontal[2] = dash.repeat(9);
-
-        // Build table
-        String[] table = new String[(records.size() + 4)];
-        // Add border row to table
-        table[0] = toTableRow(horizontal, "+-","-+-","-+");
-        // Add title row to table
-        table[1] = toTableRow(titles, "¦ "," ¦ "," ¦");
-        // Add border row to table
-        table[2] = toTableRow(horizontal, "+-","-+-","-+");
-        // Add entry rows to table
-        for (int i = 0; i < records.size(); i++) {
-            table[(i + 3)] = toTableRow(records.get(i).toArray(), "¦ "," ¦ "," ¦");
-        }
-        // Add border row to table
-        table[records.size() + 3] = toTableRow(horizontal, "+-","-+-","-+");
-
-        // Return table as an array of strings, where each item in the array is a row in the table
-        return table;
-    }
-
     /**
      * Return a row of a table as a string
      *

@@ -66,28 +66,4 @@ public class FileInput {
             return readCSV(file);
         }
     }
-
-    private static ArrayList<String[]> readCSVDebug(File location) throws IOException {
-        // Open CSV file and read in contents
-        BufferedReader inFile = new BufferedReader(new FileReader(location));
-        String row;
-        ArrayList<String[]> records = new ArrayList<>();
-        while ((row = inFile.readLine()) != null) {
-            String[] data = row.split(",");
-            records.add(data);
-            // Throw error if record does not split into three parts
-            if (data.length != 3) {
-                // Tell the user which record is causing the issue and the location of the file causing the issue
-                throw new IllegalFormatException(String.format("The record %s is incorrectly formatted. It should take the form: 'surname,initials,extension' where the extension is 5 characters long. See '%s' to rectify this issue.", row, location.getName()));
-            }
-            // Throw error if extension is not 5 characters long
-            if (data[2].length() != 5) {
-                // Tell the user which record is causing the issue and the location of the file causing the issue
-                throw new IllegalExtensionException(String.format("The extension %1$s is of length %2$d. Extensions should be of length 5, see entry '%3$s,%4$s,%1$s' in '%5$s' to rectify this issue.", data[2], data[2].length(), data[0], data[1], location.getName()));
-            }
-        }
-        inFile.close();
-        // Return the ArrayList
-        return records;
-    }
 }
