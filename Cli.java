@@ -59,7 +59,25 @@ public class Cli {
             testInsertionTime[i] /= 10000;
         }
 
-        System.out.println(String.format("\nAvergae Insertion Times:\n\nArrayDirectory = %d ns\nArrayListDirectory = %d ns\nHashMapDirectory = %d ns", testInsertionTime[0], testInsertionTime[1], testInsertionTime[2]));
+        // Fill deletion by name time results array with 0s
+        long[] testDeletionByNameTime = new long[3];
+        Arrays.fill(testDeletionByNameTime, 0);
+
+        // DeleteEntryByName test
+        for (int i = 0; i < testDirectoryArray.length; i++) {
+            for (int j = 0; j < 10000; j++) {
+                timer.start();
+                testDirectoryArray[i].deleteEntryUsingName(testDeletionEntry.getSurname());
+                timer.stop();
+                testDeletionByNameTime[i] += timer.getElapsedTime();
+                timer.reset();
+                testDirectoryArray[i].insertEntry(testDeletionEntry);
+            }
+            testDeletionByNameTime[i] /= 10000;
+        }
+
+        System.out.println(String.format("\nAvergae Insertion Times:\n\nArrayDirectory = %d ns\nArrayListDirectory = %d ns\nHashMapDirectory = %d ns\n", testInsertionTime[0], testInsertionTime[1], testInsertionTime[2]));
+        System.out.println(String.format("\nAvergae Deletion By Name Times:\n\nArrayDirectory = %d ns\nArrayListDirectory = %d ns\nHashMapDirectory = %d ns\n", testDeletionByNameTime[0], testDeletionByNameTime[1], testDeletionByNameTime[2]));
 
     }
 
