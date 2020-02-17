@@ -24,14 +24,42 @@ public class Cli {
 
         // Write records to an output csv file
         FileOutput.userOutput(directory.toArrayList());
-        
+
         // Performance testing
         StopWatch timer = new StopWatch();
         // Initialise a Directory of each type containing all of the data
         Directory testArrayDirectory = createDirectory(cleanData,1);
         Directory testArrayListDirectory = createDirectory(cleanData,2);
         Directory testHashMapDirectory = createDirectory(cleanData, 3);
+        Directory[] testDirectoryArray = new Directory[3];
+        testDirectoryArray[0] = testArrayDirectory;
+        testDirectoryArray[1] = testArrayListDirectory;
+        testDirectoryArray[2] = testHashMapDirectory;
 
+        // Obtain test entry form the middle of the cleaned data ready for deletion tests
+        int index = cleanData.size() / 2;
+        Entry testDeletionEntry = cleanData.get(index);
+        // Create test entry ready for insertion tests
+        Entry testInsertionEntry = new Entry("Smith","A.B","01234");
+
+        // Fill insertion time results array with 0s
+        long[] testInsertionTime = new long[3];
+        Arrays.fill(testInsertionTime, 0);
+
+        // InsertEntry test
+        for (int i = 0; i < testDirectoryArray.length; i++) {
+            for (int j = 0; j < 10000; j++) {
+                timer.start();
+                testDirectoryArray[i].insertEntry(testInsertionEntry);
+                timer.stop();
+                testInsertionTime[i] += timer.getElapsedTime();
+                timer.reset();
+                testDirectoryArray[i].deleteEntryUsingName(testInsertionEntry.getSurname());
+            }
+            testInsertionTime[i] /= 10000;
+        }
+
+        System.out.println(String.format("\nAvergae Insertion Times:\n\nArrayDirectory = %d ns\nArrayListDirectory = %d ns\nHashMapDirectory = %d ns", testInsertionTime[0], testInsertionTime[1], testInsertionTime[2]));
 
     }
 

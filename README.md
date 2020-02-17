@@ -1,6 +1,6 @@
 CSC1035: Practical 2
 ====================
-This package allows  for the use and analysis of directories. Directories are a class of containers sued to contain 
+This package allows  for the use and analysis of directories. Directories are a class of containers designed to contain 
 information about staff including surname, initials and telephone extensions.
 
 Dependencies:

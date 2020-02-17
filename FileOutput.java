@@ -27,7 +27,7 @@ class FileOutput {
             // Add records from file location to records from the command line configuration
             writeCSV(new File(pathname), records);
         } else {
-            System.out.println("The filename you entered was not a *.csv file, please use the file chooser to select the correct file.\n");
+            System.out.println("The filename you entered was not a *.csv file, please use the file chooser to select the correct file.");
             if (chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
                 file = chooser.getSelectedFile();
             }
