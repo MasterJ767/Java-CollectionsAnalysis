@@ -4,6 +4,10 @@ public class Entry {
     private String extension;
 
     public Entry(String surname, String initials, String extension) {
+        if (!(extension.matches("[0-9]+"))) {
+            // Tell the user which record is causing the issue and the location of the file causing the issue
+            throw new IllegalExtensionException(String.format("The extension %s contains non numerical characters, Extensions should only contain numbers 0-9.", extension));
+        }
         if (extension.length() != 5) {
             // Tell the user which record is causing the issue and the location of the file causing the issue
             throw new IllegalExtensionException(String.format("The extension %s is of length %d. Extensions should be of length 5.", extension, extension.length()));
@@ -27,6 +31,10 @@ public class Entry {
     }
 
     public void setExtension(String extension) {
+        if (!(extension.matches("[0-9]+"))) {
+            // Tell the user which record is causing the issue and the location of the file causing the issue
+            throw new IllegalExtensionException(String.format("The extension %s contains non numerical characters, Extensions should only contain numbers 0-9.", extension));
+        }
         if (extension.length() != 5) {
             // Tell the user which record is causing the issue and the location of the file causing the issue
             throw new IllegalExtensionException(String.format("The extension %s is of length %d. Extensions should be of length 5.", extension, extension.length()));

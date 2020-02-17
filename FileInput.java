@@ -15,7 +15,7 @@ class FileInput {
             // Throw error if record does not split into three parts
             if (data.length != 3) {
                 // Tell the user which record is causing the issue and the location of the file causing the issue
-                throw new IllegalFormatException(String.format("The record %s is incorrectly formatted. It should take the form: 'surname,initials,extension' where the extension is 5 characters long. See '%s' to rectify this issue.", row, location.getName()));
+                throw new IllegalFormatException(String.format("The record %s is incorrectly formatted. It should take the form: 'surname,initials,extension' where the extension is 5 characters long and only contain numeric characters. See '%s' to rectify this issue.", row, location.getName()));
             }
             Entry entry = new Entry(data[0], data[1], data[2]);
             // Add the Entry to an ArrayList
@@ -34,7 +34,7 @@ class FileInput {
             // Throw error if record does not split into three parts
             if (data.length != 3) {
                 // Tell the user which record is causing the issue and that the issue is at the command line
-                throw new IllegalFormatException(String.format("The record %s is incorrectly formatted. It should take the form: 'surname,initials,extension' where the extension is 5 characters long. See the command line to rectify this issue.", element));
+                throw new IllegalFormatException(String.format("The record %s is incorrectly formatted. It should take the form: 'surname,initials,extension' where the extension is 5 characters long and only contains numeric characters. See the command line to rectify this issue.", element));
             }
             Entry entry = new Entry(data[0], data[1], data[2]);
             // Add the Entry to an ArrayList
