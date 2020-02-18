@@ -27,6 +27,8 @@ public class Cli {
 
         // Performance testing
         StopWatch timer = new StopWatch();
+        // Set number of tests which will be performed
+        int testNumber = 10000;
         // Initialise a Directory of each type containing all of the data
         Directory testArrayDirectory = createDirectory(cleanData,1);
         Directory testArrayListDirectory = createDirectory(cleanData,2);
@@ -48,7 +50,7 @@ public class Cli {
 
         // InsertEntry test
         for (int i = 0; i < testDirectoryArray.length; i++) {
-            for (int j = 0; j < 10000; j++) {
+            for (int j = 0; j < testNumber; j++) {
                 timer.start();
                 testDirectoryArray[i].insertEntry(testInsertionEntry);
                 timer.stop();
@@ -56,7 +58,8 @@ public class Cli {
                 timer.reset();
                 testDirectoryArray[i].deleteEntryUsingName(testInsertionEntry.getSurname());
             }
-            testInsertionTime[i] /= 10000;
+            // Calculate average
+            testInsertionTime[i] /= testNumber;
         }
 
         // Fill deletion by name time results array with 0s
@@ -65,7 +68,7 @@ public class Cli {
 
         // DeleteEntryByName test
         for (int i = 0; i < testDirectoryArray.length; i++) {
-            for (int j = 0; j < 10000; j++) {
+            for (int j = 0; j < testNumber; j++) {
                 timer.start();
                 testDirectoryArray[i].deleteEntryUsingName(testDeletionEntry.getSurname());
                 timer.stop();
@@ -73,11 +76,32 @@ public class Cli {
                 timer.reset();
                 testDirectoryArray[i].insertEntry(testDeletionEntry);
             }
-            testDeletionByNameTime[i] /= 10000;
+            // Calculate average
+            testDeletionByNameTime[i] /= testNumber;
         }
 
-        System.out.println(String.format("\nAvergae Insertion Times:\n\nArrayDirectory = %d ns\nArrayListDirectory = %d ns\nHashMapDirectory = %d ns\n", testInsertionTime[0], testInsertionTime[1], testInsertionTime[2]));
-        System.out.println(String.format("\nAvergae Deletion By Name Times:\n\nArrayDirectory = %d ns\nArrayListDirectory = %d ns\nHashMapDirectory = %d ns\n", testDeletionByNameTime[0], testDeletionByNameTime[1], testDeletionByNameTime[2]));
+        // Fill deletion by extension time results array with 0s
+        long[] testDeletionByExtensionTime = new long[3];
+        Arrays.fill(testDeletionByExtensionTime, 0);
+
+        // DeleteEntryByExtension test
+        for (int i = 0; i < testDirectoryArray.length; i++) {
+            for (int j = 0; j < testNumber; j++) {
+                timer.start();
+                testDirectoryArray[i].deleteEntryUsingExtension(testDeletionEntry.getExtension());
+                timer.stop();
+                testDeletionByExtensionTime[i] += timer.getElapsedTime();
+                timer.reset();
+                testDirectoryArray[i].insertEntry(testDeletionEntry);
+            }
+            // Calculate average
+            testDeletionByExtensionTime[i] /= testNumber;
+        }
+
+        System.out.println("Performance Tests:\n\n");
+        System.out.println(String.format("\nAverage Insertion Times:\n\n%-18s = %6d ns\n%-18s = %6d ns\n%-18s = %6d ns\n", choices[0], testInsertionTime[0], choices[1], testInsertionTime[1], choices[2], testInsertionTime[2]));
+        System.out.println(String.format("\nAverage Deletion By Name Times:\n\n%-18s = %6d ns\n%-18s = %6d ns\n%-18s = %6d ns\n", choices[0], testDeletionByNameTime[0], choices[1], testDeletionByNameTime[1], choices[2], testDeletionByNameTime[2]));
+        System.out.println(String.format("\nAverage Deletion By Extension Times:\n\n%-18s = %6d ns\n%-18s = %6d ns\n%-18s = %6d ns\n", choices[0], testDeletionByExtensionTime[0], choices[1], testDeletionByExtensionTime[1], choices[2], testDeletionByExtensionTime[2]));
 
     }
 
