@@ -117,12 +117,29 @@ public class Cli {
             testUpdateExtensionTime[i] /= testNumber;
         }
 
-        System.out.println("\nPerformance Tests:\n");
-        System.out.println(String.format("\nAverage Insertion Times:\n\n%-18s = %6d ns\n%-18s = %6d ns\n%-18s = %6d ns\n", choices[0], testInsertionTime[0], choices[1], testInsertionTime[1], choices[2], testInsertionTime[2]));
-        System.out.println(String.format("\nAverage Deletion By Name Times:\n\n%-18s = %6d ns\n%-18s = %6d ns\n%-18s = %6d ns\n", choices[0], testDeletionByNameTime[0], choices[1], testDeletionByNameTime[1], choices[2], testDeletionByNameTime[2]));
-        System.out.println(String.format("\nAverage Deletion By Extension Times:\n\n%-18s = %6d ns\n%-18s = %6d ns\n%-18s = %6d ns\n", choices[0], testDeletionByExtensionTime[0], choices[1], testDeletionByExtensionTime[1], choices[2], testDeletionByExtensionTime[2]));
-        System.out.println(String.format("\nAverage Update Extension Times:\n\n%-18s = %6d ns\n%-18s = %6d ns\n%-18s = %6d ns\n", choices[0], testUpdateExtensionTime[0], choices[1], testUpdateExtensionTime[1], choices[2], testUpdateExtensionTime[2]));
+        // Fill lookup extension time results array with 0s
+        long[] testLookupExtensionTime = new long[3];
+        Arrays.fill(testLookupExtensionTime, 0);
 
+        // LookupExtension test
+        for (int i = 0; i < testDirectoryArray.length; i++) {
+            for (int j = 0; j < testNumber; j++) {
+                timer.start();
+                testDirectoryArray[i].lookupExtension(testDeletionEntry.getSurname());
+                timer.stop();
+                testLookupExtensionTime[i] += timer.getElapsedTime();
+                timer.reset();
+            }
+            // Calculate average
+            testLookupExtensionTime[i] /= testNumber;
+        }
+
+        System.out.println("\nPerformance Tests:\n");
+        System.out.println(String.format("\nAverage Entry Insertion Times:\n\n%-18s = %6d ns\n%-18s = %6d ns\n%-18s = %6d ns\n", choices[0], testInsertionTime[0], choices[1], testInsertionTime[1], choices[2], testInsertionTime[2]));
+        System.out.println(String.format("\nAverage Entry Deletion By Name Times:\n\n%-18s = %6d ns\n%-18s = %6d ns\n%-18s = %6d ns\n", choices[0], testDeletionByNameTime[0], choices[1], testDeletionByNameTime[1], choices[2], testDeletionByNameTime[2]));
+        System.out.println(String.format("\nAverage Entry Deletion By Extension Times:\n\n%-18s = %6d ns\n%-18s = %6d ns\n%-18s = %6d ns\n", choices[0], testDeletionByExtensionTime[0], choices[1], testDeletionByExtensionTime[1], choices[2], testDeletionByExtensionTime[2]));
+        System.out.println(String.format("\nAverage Update Extension Times:\n\n%-18s = %6d ns\n%-18s = %6d ns\n%-18s = %6d ns\n", choices[0], testUpdateExtensionTime[0], choices[1], testUpdateExtensionTime[1], choices[2], testUpdateExtensionTime[2]));
+        System.out.println(String.format("\nAverage Lookup Extension Times:\n\n%-18s = %6d ns\n%-18s = %6d ns\n%-18s = %6d ns\n", choices[0], testLookupExtensionTime[0], choices[1], testLookupExtensionTime[1], choices[2], testLookupExtensionTime[2]));
     }
 
     private static Directory createDirectory(ArrayList<Entry> data, int variant) {
