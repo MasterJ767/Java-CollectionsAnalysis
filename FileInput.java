@@ -51,7 +51,7 @@ class FileInput {
         File file = null;
         // Ask for user to input a file location
         Scanner input = new Scanner(System.in);
-        System.out.print("Enter the pathname of the file which you would like records to be read from:\n> ");
+        System.out.print("Enter the pathname of the file which you would like records to be read from:\n");
         String pathname = input.nextLine();
         // Bring up JFileChooser if pathname does not end with ".csv" it is nto a CSV file, so make user select file with JFileChooser
         if (pathname.endsWith(".csv")) {

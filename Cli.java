@@ -1,8 +1,9 @@
 import java.io.*;
 import java.util.*;
+import java.util.concurrent.TimeUnit;
 
 public class Cli {
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, InterruptedException {
         // Convert records from the command line configuration into a format ready to be inserted into the directory
         ArrayList<Entry> dirtyData = FileInput.convertRecords(args);
         // Collect records from an input csv file and add to command line configuration records
@@ -45,8 +46,11 @@ public class Cli {
         Entry testInsertionEntry = new Entry("Smith","A.B","01234");
 
         // Fill insertion time results array with 0s
-        long[] testInsertionTime = new long[3];
+        long[] testInsertionTime = new long[9];
         Arrays.fill(testInsertionTime, 0);
+
+        // Create progress bar
+        ProgressBar prog = new ProgressBar(testNumber*testDirectoryArray.length, "Progress", 100);
 
         // InsertEntry test
         for (int i = 0; i < testDirectoryArray.length; i++) {
@@ -54,13 +58,23 @@ public class Cli {
                 timer.start();
                 testDirectoryArray[i].insertEntry(testInsertionEntry);
                 timer.stop();
-                testInsertionTime[i] += timer.getElapsedTime();
+                testInsertionTime[(i*3)+1] += timer.getElapsedTime();
+                if (timer.getElapsedTime() < testInsertionTime[(i*3)]) {
+                    testInsertionTime[(i*3)] = timer.getElapsedTime();
+                } else if (timer.getElapsedTime() > testInsertionTime[(i*3)+2]) {
+                    testInsertionTime[(i*3)+2] = timer.getElapsedTime();
+                }
+                TimeUnit.MILLISECONDS.sleep(1);
                 timer.reset();
                 testDirectoryArray[i].deleteEntryUsingName(testInsertionEntry.getSurname());
+                prog.progress(1);
+                prog.show();
             }
             // Calculate average
-            testInsertionTime[i] /= testNumber;
+            testInsertionTime[(i*3)+1] /= testNumber;
         }
+
+        prog.finish();
 
         // Fill deletion by name time results array with 0s
         long[] testDeletionByNameTime = new long[3];
@@ -135,7 +149,7 @@ public class Cli {
         }
 
         System.out.println("\nPerformance Tests:\n");
-        System.out.println(String.format("\nAverage Entry Insertion Times:\n\n%-18s = %6d ns\n%-18s = %6d ns\n%-18s = %6d ns\n", choices[0], testInsertionTime[0], choices[1], testInsertionTime[1], choices[2], testInsertionTime[2]));
+        System.out.println(String.format("\nEntry Insertion Times:\n\n%-18s = %11d ns (min), %6d ns (avg), %11d ns (max)\n%-18s = %11d ns (min), %6d ns (avg), %11d ns (max)\n%-18s = %11d ns (min), %6d ns (avg), %11d ns (max)\n", choices[0], testInsertionTime[0], testInsertionTime[1], testInsertionTime[2], choices[1], testInsertionTime[3], testInsertionTime[4], testInsertionTime[5], choices[2], testInsertionTime[6], testInsertionTime[7], testInsertionTime[8]));
         System.out.println(String.format("\nAverage Entry Deletion By Name Times:\n\n%-18s = %6d ns\n%-18s = %6d ns\n%-18s = %6d ns\n", choices[0], testDeletionByNameTime[0], choices[1], testDeletionByNameTime[1], choices[2], testDeletionByNameTime[2]));
         System.out.println(String.format("\nAverage Entry Deletion By Extension Times:\n\n%-18s = %6d ns\n%-18s = %6d ns\n%-18s = %6d ns\n", choices[0], testDeletionByExtensionTime[0], choices[1], testDeletionByExtensionTime[1], choices[2], testDeletionByExtensionTime[2]));
         System.out.println(String.format("\nAverage Update Extension Times:\n\n%-18s = %6d ns\n%-18s = %6d ns\n%-18s = %6d ns\n", choices[0], testUpdateExtensionTime[0], choices[1], testUpdateExtensionTime[1], choices[2], testUpdateExtensionTime[2]));
@@ -181,7 +195,7 @@ public class Cli {
         }
         int choice;
         Scanner input = new Scanner(System.in);
-        System.out.print("> ");
+        System.out.print("");
         while (true) {
             try {
                 choice = input.nextInt();
@@ -189,7 +203,7 @@ public class Cli {
                     throw new IndexOutOfBoundsException();
                 }
             } catch (InputMismatchException|ClassCastException|IndexOutOfBoundsException e) {
-                System.out.print("Please enter the number which corresponds to your choice.\n> ");
+                System.out.print("Please enter the number which corresponds to your choice.\n");
                 input.next();
                 continue;
             }
@@ -197,5 +211,4 @@ public class Cli {
         }
         return choice;
     }
-
 }
