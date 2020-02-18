@@ -98,10 +98,30 @@ public class Cli {
             testDeletionByExtensionTime[i] /= testNumber;
         }
 
-        System.out.println("Performance Tests:\n\n");
+        // Fill update extension time results array with 0s
+        long[] testUpdateExtensionTime = new long[3];
+        Arrays.fill(testUpdateExtensionTime, 0);
+
+        // UpdateEntryExtension test
+        for (int i = 0; i < testDirectoryArray.length; i++) {
+            for (int j = 0; j < testNumber; j++) {
+                testDirectoryArray[i].insertEntry(testInsertionEntry);
+                timer.start();
+                testDirectoryArray[i].updateExtensionUsingName(testInsertionEntry.getSurname(), "98765");
+                timer.stop();
+                testUpdateExtensionTime[i] += timer.getElapsedTime();
+                timer.reset();
+                testDirectoryArray[i].updateExtensionUsingName(testInsertionEntry.getSurname(), "01234");
+            }
+            // Calculate average
+            testUpdateExtensionTime[i] /= testNumber;
+        }
+
+        System.out.println("\nPerformance Tests:\n");
         System.out.println(String.format("\nAverage Insertion Times:\n\n%-18s = %6d ns\n%-18s = %6d ns\n%-18s = %6d ns\n", choices[0], testInsertionTime[0], choices[1], testInsertionTime[1], choices[2], testInsertionTime[2]));
         System.out.println(String.format("\nAverage Deletion By Name Times:\n\n%-18s = %6d ns\n%-18s = %6d ns\n%-18s = %6d ns\n", choices[0], testDeletionByNameTime[0], choices[1], testDeletionByNameTime[1], choices[2], testDeletionByNameTime[2]));
         System.out.println(String.format("\nAverage Deletion By Extension Times:\n\n%-18s = %6d ns\n%-18s = %6d ns\n%-18s = %6d ns\n", choices[0], testDeletionByExtensionTime[0], choices[1], testDeletionByExtensionTime[1], choices[2], testDeletionByExtensionTime[2]));
+        System.out.println(String.format("\nAverage Update Extension Times:\n\n%-18s = %6d ns\n%-18s = %6d ns\n%-18s = %6d ns\n", choices[0], testUpdateExtensionTime[0], choices[1], testUpdateExtensionTime[1], choices[2], testUpdateExtensionTime[2]));
 
     }
 
