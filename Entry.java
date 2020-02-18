@@ -68,5 +68,10 @@ public class Entry {
         }
         return false;
     }
+
+    public int hashCode() {
+        int hc = 17;
+        return (37 * hc) + (surname == null ? 0 : surname.hashCode());
+    }
 }
 
