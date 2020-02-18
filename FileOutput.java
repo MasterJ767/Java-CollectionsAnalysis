@@ -23,16 +23,22 @@ class FileOutput {
         System.out.print("Enter the pathname of the file which you would like records to be written to:\n");
         String pathname = input.nextLine();
         // Bring up JFileChooser if pathname does not end with ".csv" it is nto a CSV file, so make user select file with JFileChooser
-        if (pathname.endsWith(".csv")) {
-            // Add records from file location to records from the command line configuration
+        try {
+            // Convert entries to records and write into file location
             writeCSV(new File(pathname), records);
-        } else {
+        } catch (IOException e) {
             System.out.println("The filename you entered was not a *.csv file, please use the file chooser to select the correct file.");
-            if (chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
-                file = chooser.getSelectedFile();
+            try {
+                if (chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
+                    file = chooser.getSelectedFile();
+                }
+                // Convert entries to records and write into file location
+                writeCSV(file, records);
+            } catch (NullPointerException|IOException n) {
+                System.out.println("You failed to select a valid file with JFileChooser, the program will default to using output_data.csv file.");
+                // Convert entries to records and write into file location
+                writeCSV(new File("output_data.csv"), records);
             }
-            // Add records from file location to records from the command line configuration
-            writeCSV(file, records);
         }
     }
 }

@@ -44,7 +44,7 @@ class FileInput {
         return records;
     }
 
-    static ArrayList<Entry> userInput() throws IOException {
+    static ArrayList<Entry> userInput() throws IOException{
         // Initialise file choosing objects, in case it is necessary to use them later
         JFileChooser chooser = new JFileChooser();
         chooser.setFileFilter(new FileNameExtensionFilter("COMMA SEPARATED VALUES FILE (*.csv)", ".csv", "csv"));
@@ -53,17 +53,24 @@ class FileInput {
         Scanner input = new Scanner(System.in);
         System.out.print("Enter the pathname of the file which you would like records to be read from:\n");
         String pathname = input.nextLine();
-        // Bring up JFileChooser if pathname does not end with ".csv" it is nto a CSV file, so make user select file with JFileChooser
-        if (pathname.endsWith(".csv")) {
-            // Add records from file location to records from the command line configuration
+        // Bring up JFileChooser if user input file doesnt exist
+        try {
+            // Read in records from file location and convert them to entries
             return readCSV(new File(pathname));
-        } else {
+        } catch (IOException e) {
             System.out.println("The filename you entered was not a *.csv file, please use the file chooser to select the correct file.");
-            if (chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
-                file = chooser.getSelectedFile();
+            // Switch to default file if user presses cancel in the JFileChooser window
+            try {
+                if (chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
+                    file = chooser.getSelectedFile();
+                }
+                // Read in records from file location and convert them to entries
+                return readCSV(file);
+            } catch (NullPointerException|IOException n) {
+                System.out.println("You failed to select a valid file with JFileChooser, the program will default to using test_data.csv file.");
+                // Read in records from file location and convert them to entries
+                return readCSV(new File("test_data.csv"));
             }
-            // Add records from file location to records from the command line configuration
-            return readCSV(file);
         }
     }
 }

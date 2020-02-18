@@ -64,7 +64,6 @@ public class Cli {
                 } else if (timer.getElapsedTime() > testInsertionTime[(i*3)+2]) {
                     testInsertionTime[(i*3)+2] = timer.getElapsedTime();
                 }
-                TimeUnit.MILLISECONDS.sleep(1);
                 timer.reset();
                 testDirectoryArray[i].deleteEntryUsingName(testInsertionEntry.getSurname());
                 prog.progress(1);
@@ -149,7 +148,7 @@ public class Cli {
         }
 
         System.out.println("\nPerformance Tests:\n");
-        System.out.println(String.format("\nEntry Insertion Times:\n\n%-18s = %11d ns (min), %6d ns (avg), %11d ns (max)\n%-18s = %11d ns (min), %6d ns (avg), %11d ns (max)\n%-18s = %11d ns (min), %6d ns (avg), %11d ns (max)\n", choices[0], testInsertionTime[0], testInsertionTime[1], testInsertionTime[2], choices[1], testInsertionTime[3], testInsertionTime[4], testInsertionTime[5], choices[2], testInsertionTime[6], testInsertionTime[7], testInsertionTime[8]));
+        System.out.println(String.format("\nEntry Insertion Times:\n\n%-18s = %6d ns (min), %6d ns (avg), %6d ns (max)\n%-18s = %6d ns (min), %6d ns (avg), %6d ns (max)\n%-18s = %6d ns (min), %6d ns (avg), %6d ns (max)\n", choices[0], testInsertionTime[0], testInsertionTime[1], testInsertionTime[2], choices[1], testInsertionTime[3], testInsertionTime[4], testInsertionTime[5], choices[2], testInsertionTime[6], testInsertionTime[7], testInsertionTime[8]));
         System.out.println(String.format("\nAverage Entry Deletion By Name Times:\n\n%-18s = %6d ns\n%-18s = %6d ns\n%-18s = %6d ns\n", choices[0], testDeletionByNameTime[0], choices[1], testDeletionByNameTime[1], choices[2], testDeletionByNameTime[2]));
         System.out.println(String.format("\nAverage Entry Deletion By Extension Times:\n\n%-18s = %6d ns\n%-18s = %6d ns\n%-18s = %6d ns\n", choices[0], testDeletionByExtensionTime[0], choices[1], testDeletionByExtensionTime[1], choices[2], testDeletionByExtensionTime[2]));
         System.out.println(String.format("\nAverage Update Extension Times:\n\n%-18s = %6d ns\n%-18s = %6d ns\n%-18s = %6d ns\n", choices[0], testUpdateExtensionTime[0], choices[1], testUpdateExtensionTime[1], choices[2], testUpdateExtensionTime[2]));
