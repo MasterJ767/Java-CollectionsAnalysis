@@ -23,11 +23,12 @@ class FileOutput {
         System.out.print("Enter the pathname of the file which you would like records to be written to:\n");
         String pathname = input.nextLine();
         // Bring up JFileChooser if pathname does not end with ".csv" it is nto a CSV file, so make user select file with JFileChooser
-        try {
+        if (pathname.endsWith(".csv")) {
             // Convert entries to records and write into file location
             writeCSV(new File(pathname), records);
-        } catch (IOException e) {
+        } else {
             System.out.println("The filename you entered was not a *.csv file, please use the file chooser to select the correct file.");
+            // Switch to default file if user presses cancel in the JFileChooser window
             try {
                 if (chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
                     file = chooser.getSelectedFile();

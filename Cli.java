@@ -159,7 +159,7 @@ public class Cli {
         }
 
         // Print results of InsertEntry tests
-        System.out.println(String.format("\n\nEntry Insertion Times:\n\n%-18s = %6d ns (min), %6d ns (avg), %8d ns (max)\n%-18s = %6d ns (min), %6d ns (avg), %8d ns (max)\n%-18s = %6d ns (min), %6d ns (avg), %8d ns (max)\n", testDirectoryTypes[0], testInsertionTime[0], testInsertionTime[1], testInsertionTime[2], testDirectoryTypes[1], testInsertionTime[3], testInsertionTime[4], testInsertionTime[5], testDirectoryTypes[2], testInsertionTime[6], testInsertionTime[7], testInsertionTime[8]));
+        System.out.println(String.format("\n\nEntry Insertion Times:\n\n%-18s = %6d ns (min), %6d ns (avg), %9d ns (max)\n%-18s = %6d ns (min), %6d ns (avg), %9d ns (max)\n%-18s = %6d ns (min), %6d ns (avg), %9d ns (max)\n", testDirectoryTypes[0], testInsertionTime[0], testInsertionTime[1], testInsertionTime[2], testDirectoryTypes[1], testInsertionTime[3], testInsertionTime[4], testInsertionTime[5], testDirectoryTypes[2], testInsertionTime[6], testInsertionTime[7], testInsertionTime[8]));
     }
 
     private static void testDeletionEntryByNameMethod(Directory[] testDirectoryArray, String[] testDirectoryTypes, int testNumber, StopWatch timer, Entry testDeletionEntry) throws InterruptedException {
@@ -202,7 +202,7 @@ public class Cli {
             testDeletionByNameTime[(i*3)+1] /= testNumber;
         }
 
-        System.out.println(String.format("\n\nEntry Deletion By Name Times:\n\n%-18s = %6d ns (min), %6d ns (avg), %8d ns (max)\n%-18s = %6d ns (min), %6d ns (avg), %8d ns (max)\n%-18s = %6d ns (min), %6d ns (avg), %8d ns (max)\n", testDirectoryTypes[0], testDeletionByNameTime[0], testDeletionByNameTime[1], testDeletionByNameTime[2], testDirectoryTypes[1], testDeletionByNameTime[3], testDeletionByNameTime[4], testDeletionByNameTime[5], testDirectoryTypes[2], testDeletionByNameTime[6], testDeletionByNameTime[7], testDeletionByNameTime[8]));
+        System.out.println(String.format("\n\nEntry Deletion By Name Times:\n\n%-18s = %6d ns (min), %6d ns (avg), %9d ns (max)\n%-18s = %6d ns (min), %6d ns (avg), %9d ns (max)\n%-18s = %6d ns (min), %6d ns (avg), %9d ns (max)\n", testDirectoryTypes[0], testDeletionByNameTime[0], testDeletionByNameTime[1], testDeletionByNameTime[2], testDirectoryTypes[1], testDeletionByNameTime[3], testDeletionByNameTime[4], testDeletionByNameTime[5], testDirectoryTypes[2], testDeletionByNameTime[6], testDeletionByNameTime[7], testDeletionByNameTime[8]));
     }
 
     private static void testDeletionEntryByExtensionMethod(Directory[] testDirectoryArray, String[] testDirectoryTypes, int testNumber, StopWatch timer, Entry testDeletionEntry) throws InterruptedException {
@@ -245,7 +245,7 @@ public class Cli {
             testDeletionByExtensionTime[(i*3)+1] /= testNumber;
         }
 
-        System.out.println(String.format("\n\nEntry Deletion By Extension Times:\n\n%-18s = %6d ns (min), %6d ns (avg), %8d ns (max)\n%-18s = %6d ns (min), %6d ns (avg), %8d ns (max)\n%-18s = %6d ns (min), %6d ns (avg), %8d ns (max)\n", testDirectoryTypes[0], testDeletionByExtensionTime[0], testDeletionByExtensionTime[1], testDeletionByExtensionTime[2], testDirectoryTypes[1], testDeletionByExtensionTime[3], testDeletionByExtensionTime[4], testDeletionByExtensionTime[5], testDirectoryTypes[2], testDeletionByExtensionTime[6], testDeletionByExtensionTime[7], testDeletionByExtensionTime[8]));
+        System.out.println(String.format("\n\nEntry Deletion By Extension Times:\n\n%-18s = %6d ns (min), %6d ns (avg), %9d ns (max)\n%-18s = %6d ns (min), %6d ns (avg), %9d ns (max)\n%-18s = %6d ns (min), %6d ns (avg), %9d ns (max)\n", testDirectoryTypes[0], testDeletionByExtensionTime[0], testDeletionByExtensionTime[1], testDeletionByExtensionTime[2], testDirectoryTypes[1], testDeletionByExtensionTime[3], testDeletionByExtensionTime[4], testDeletionByExtensionTime[5], testDirectoryTypes[2], testDeletionByExtensionTime[6], testDeletionByExtensionTime[7], testDeletionByExtensionTime[8]));
     }
 
     private static void testUpdateEntryExtensionMethod(Directory[] testDirectoryArray, String[] testDirectoryTypes, int testNumber, StopWatch timer, Entry testInsertionEntry) throws InterruptedException {
@@ -288,7 +288,7 @@ public class Cli {
             testUpdateExtensionTime[(i*3)+1] /= testNumber;
         }
 
-        System.out.println(String.format("\n\nUpdate Entry Extension Times:\n\n%-18s = %6d ns (min), %6d ns (avg), %8d ns (max)\n%-18s = %6d ns (min), %6d ns (avg), %8d ns (max)\n%-18s = %6d ns (min), %6d ns (avg), %8d ns (max)\n", testDirectoryTypes[0], testUpdateExtensionTime[0], testUpdateExtensionTime[1], testUpdateExtensionTime[2], testDirectoryTypes[1], testUpdateExtensionTime[3], testUpdateExtensionTime[4], testUpdateExtensionTime[5], testDirectoryTypes[2], testUpdateExtensionTime[6], testUpdateExtensionTime[7], testUpdateExtensionTime[8]));
+        System.out.println(String.format("\n\nUpdate Entry Extension Times:\n\n%-18s = %6d ns (min), %6d ns (avg), %9d ns (max)\n%-18s = %6d ns (min), %6d ns (avg), %9d ns (max)\n%-18s = %6d ns (min), %6d ns (avg), %9d ns (max)\n", testDirectoryTypes[0], testUpdateExtensionTime[0], testUpdateExtensionTime[1], testUpdateExtensionTime[2], testDirectoryTypes[1], testUpdateExtensionTime[3], testUpdateExtensionTime[4], testUpdateExtensionTime[5], testDirectoryTypes[2], testUpdateExtensionTime[6], testUpdateExtensionTime[7], testUpdateExtensionTime[8]));
     }
 
     private static void testLookupExtensionMethod(Directory[] testDirectoryArray, String[] testDirectoryTypes, int testNumber, StopWatch timer, Entry testDeletionEntry) throws InterruptedException {
@@ -330,6 +330,6 @@ public class Cli {
         }
 
 
-        System.out.println(String.format("\n\nLookup Entry Extension Times:\n\n%-18s = %6d ns (min), %6d ns (avg), %8d ns (max)\n%-18s = %6d ns (min), %6d ns (avg), %8d ns (max)\n%-18s = %6d ns (min), %6d ns (avg), %8d ns (max)\n", testDirectoryTypes[0], testLookupExtensionTime[0], testLookupExtensionTime[1], testLookupExtensionTime[2], testDirectoryTypes[1], testLookupExtensionTime[3], testLookupExtensionTime[4], testLookupExtensionTime[5], testDirectoryTypes[2], testLookupExtensionTime[6], testLookupExtensionTime[7], testLookupExtensionTime[8]));
+        System.out.println(String.format("\n\nLookup Entry Extension Times:\n\n%-18s = %6d ns (min), %6d ns (avg), %9d ns (max)\n%-18s = %6d ns (min), %6d ns (avg), %9d ns (max)\n%-18s = %6d ns (min), %6d ns (avg), %9d ns (max)\n", testDirectoryTypes[0], testLookupExtensionTime[0], testLookupExtensionTime[1], testLookupExtensionTime[2], testDirectoryTypes[1], testLookupExtensionTime[3], testLookupExtensionTime[4], testLookupExtensionTime[5], testDirectoryTypes[2], testLookupExtensionTime[6], testLookupExtensionTime[7], testLookupExtensionTime[8]));
     }
 }

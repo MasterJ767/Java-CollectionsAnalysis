@@ -53,7 +53,7 @@ public class ProgressBar {
         String full = "#";
         String empty = ".";
 
-        System.out.print(String.format("\r%s[%s%s]", title, full.repeat(fullWidth), empty.repeat(emptyWidth)));
+        System.out.print(String.format("\r%s{%s%s}", title, full.repeat(fullWidth), empty.repeat(emptyWidth)));
         System.out.flush();
     }
 
