@@ -9,7 +9,7 @@ None
 
 How to use:
 -----------
-Run the Cli.java file.
+Run the CollectionAnalysis.java file.
 
 Built With:
 -----------

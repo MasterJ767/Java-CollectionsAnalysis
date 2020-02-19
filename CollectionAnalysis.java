@@ -2,7 +2,7 @@ import java.io.*;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 
-public class Cli {
+public class CollectionAnalysis {
     public static void main(String[] args) throws IOException, InterruptedException {
         // Convert records from the command line configuration into a format ready to be inserted into the directory
         ArrayList<Entry> dirtyData = FileInput.convertRecords(args);

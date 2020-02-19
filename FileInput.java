@@ -46,7 +46,8 @@ class FileInput {
     }
 
     static ArrayList<Entry> userInput() throws IOException{
-        // Initialise file choosing objects, in case it is necessary to use them later
+        /* Initialise file choosing objects, in case it is necessary to use them later
+        JFileChooser defaults to current working directory and filters files for csv files*/
         JFileChooser chooser = new JFileChooser(Paths.get("").toAbsolutePath().toString());
         chooser.setFileFilter(new FileNameExtensionFilter("COMMA SEPARATED VALUES FILE (*.csv)", ".csv", "csv"));
         File file = null;
