@@ -2,6 +2,7 @@ import java.io.*;
 import java.util.*;
 import javax.swing.*;
 import javax.swing.filechooser.*;
+import java.nio.file.*;
 
 class FileOutput {
     private static void writeCSV(File location, List<Entry> records) throws IOException{
@@ -15,7 +16,7 @@ class FileOutput {
 
     static void userOutput(List<Entry> records) throws IOException{
         // Initialise file choosing objects, in case it is necessary to use them later
-        JFileChooser chooser = new JFileChooser();
+        JFileChooser chooser = new JFileChooser(Paths.get("").toAbsolutePath().toString());
         chooser.setFileFilter(new FileNameExtensionFilter("COMMA SEPARATED VALUES FILE (*.csv)", ".csv", "csv"));
         File file = null;
         // Ask for user to input a file location

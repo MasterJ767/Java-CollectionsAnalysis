@@ -2,6 +2,7 @@ import java.io.*;
 import java.util.*;
 import javax.swing.*;
 import javax.swing.filechooser.*;
+import java.nio.file.*;
 
 class FileInput {
     private static ArrayList<Entry> readCSV(File location) throws IOException {
@@ -46,7 +47,7 @@ class FileInput {
 
     static ArrayList<Entry> userInput() throws IOException{
         // Initialise file choosing objects, in case it is necessary to use them later
-        JFileChooser chooser = new JFileChooser();
+        JFileChooser chooser = new JFileChooser(Paths.get("").toAbsolutePath().toString());
         chooser.setFileFilter(new FileNameExtensionFilter("COMMA SEPARATED VALUES FILE (*.csv)", ".csv", "csv"));
         File file = null;
         // Ask for user to input a file location
