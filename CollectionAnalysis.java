@@ -120,7 +120,7 @@ public class CollectionAnalysis {
         }
         int choice;
         Scanner input = new Scanner(System.in);
-        System.out.print("");
+        System.out.print("> ");
         while (true) {
             try {
                 choice = input.nextInt();
@@ -128,7 +128,7 @@ public class CollectionAnalysis {
                     throw new IndexOutOfBoundsException();
                 }
             } catch (InputMismatchException|ClassCastException|IndexOutOfBoundsException e) {
-                System.out.print("Please enter the number which corresponds to your choice.\n");
+                System.out.print("Please enter the number which corresponds to your choice.\n> ");
                 input.next();
                 continue;
             }

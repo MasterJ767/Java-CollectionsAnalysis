@@ -53,7 +53,7 @@ class FileInput {
         File file = null;
         // Ask for user to input a file location
         Scanner input = new Scanner(System.in);
-        System.out.print("Enter the pathname of the file which you would like records to be read from:\n");
+        System.out.print("Enter the pathname of the file which you would like records to be read from:\n> ");
         String pathname = input.nextLine();
         // Bring up JFileChooser if user input file doesnt exist
         try {

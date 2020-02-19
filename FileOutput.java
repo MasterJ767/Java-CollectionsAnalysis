@@ -22,7 +22,7 @@ class FileOutput {
         File file = null;
         // Ask for user to input a file location
         Scanner input = new Scanner(System.in);
-        System.out.print("Enter the pathname of the file which you would like records to be written to:\n");
+        System.out.print("Enter the pathname of the file which you would like records to be written to:\n> ");
         String pathname = input.nextLine();
         // Bring up JFileChooser if pathname does not end with ".csv" as it is not a CSV file, so make user select file with JFileChooser
         if (pathname.endsWith(".csv")) {
@@ -62,7 +62,7 @@ class FileOutput {
         File file = null;
         // Ask for user to input a file location
         Scanner input = new Scanner(System.in);
-        System.out.print("Enter the pathname of the file which you would like performance results to be written to:\n");
+        System.out.print("Enter the pathname of the file which you would like performance results to be written to:\n> ");
         String pathname = input.nextLine();
         // Bring up JFileChooser if pathname does not end with ".txt" as it is not a TEXT file, so make user select file with JFileChooser
         if (pathname.endsWith(".txt")) {
