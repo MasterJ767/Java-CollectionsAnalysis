@@ -137,16 +137,9 @@ public class CollectionAnalysis {
                 timer.start();
                 testDirectoryArray[i].insertEntry(testInsertionEntry);
                 timer.stop();
-                // Add time to running total in order to calculate average later
-                testInsertionTime[(i * 3) + 1] += timer.getElapsedTime();
-                // Compare time to previous minimum, if smaller replace
-                if (timer.getElapsedTime() < testInsertionTime[(i * 3)]) {
-                    testInsertionTime[(i * 3)] = timer.getElapsedTime();
-                } else if (timer.getElapsedTime() > testInsertionTime[(i * 3) + 2]) {
-                    testInsertionTime[(i * 3) + 2] = timer.getElapsedTime();
-                }
-                // Force the computer to sleep otherwise some times come back as 0 ns
-                TimeUnit.MILLISECONDS.sleep(1);
+                /// Perform min, avg and max calculations
+                long[]returnedTimes = timeCalculations(testInsertionTime, i, timer.getElapsedTime());
+                System.arraycopy(returnedTimes, 0,testInsertionTime,0,3*testDirectoryArray.length);
                 timer.reset();
                 // Delete inserted entry so it may be added again in the next test
                 testDirectoryArray[i].deleteEntryUsingName(testInsertionEntry.getSurname());
@@ -179,18 +172,9 @@ public class CollectionAnalysis {
                 timer.start();
                 testDirectoryArray[i].deleteEntryUsingName(testDeletionEntry.getSurname());
                 timer.stop();
-                // Add time to running total in order to calculate average later
-                testDeletionByNameTime[(i * 3) + 1] += timer.getElapsedTime();
-                // Compare time to previous minimum, if smaller replace
-                if (timer.getElapsedTime() < testDeletionByNameTime[(i*3)]) {
-                    testDeletionByNameTime[(i*3)] = timer.getElapsedTime();
-                }
-                // Compare time to previous maximum, if larger replace
-                else if (timer.getElapsedTime() > testDeletionByNameTime[(i*3)+2]) {
-                    testDeletionByNameTime[(i*3)+2] = timer.getElapsedTime();
-                }
-                // Force the computer to sleep otherwise some times come back as 0 ns
-                TimeUnit.MILLISECONDS.sleep(1);
+                // Perform min, avg and max calculations
+                long[]returnedTimes = timeCalculations(testDeletionByNameTime, i, timer.getElapsedTime());
+                System.arraycopy(returnedTimes, 0,testDeletionByNameTime,0,3*testDirectoryArray.length);
                 timer.reset();
                 // Insert deleted entry so it may be removed again in next test
                 testDirectoryArray[i].insertEntry(testDeletionEntry);
@@ -222,18 +206,9 @@ public class CollectionAnalysis {
                 timer.start();
                 testDirectoryArray[i].deleteEntryUsingExtension(testDeletionEntry.getExtension());
                 timer.stop();
-                // Add time to running total in order to calculate average later
-                testDeletionByExtensionTime[(i*3)+1] += timer.getElapsedTime();
-                // Compare time to previous minimum, if smaller replace
-                if (timer.getElapsedTime() < testDeletionByExtensionTime[(i*3)]) {
-                    testDeletionByExtensionTime[(i*3)] = timer.getElapsedTime();
-                }
-                // Compare time to previous maximum, if larger replace
-                else if (timer.getElapsedTime() > testDeletionByExtensionTime[(i*3)+2]) {
-                    testDeletionByExtensionTime[(i*3)+2] = timer.getElapsedTime();
-                }
-                // Force the computer to sleep otherwise some times come back as 0 ns
-                TimeUnit.MILLISECONDS.sleep(1);
+                // Perform min, avg and max calculations
+                long[]returnedTimes = timeCalculations(testDeletionByExtensionTime, i, timer.getElapsedTime());
+                System.arraycopy(returnedTimes, 0,testDeletionByExtensionTime,0,3*testDirectoryArray.length);
                 timer.reset();
                 // Insert deleted entry so it may be removed again in next test
                 testDirectoryArray[i].insertEntry(testDeletionEntry);
@@ -266,18 +241,9 @@ public class CollectionAnalysis {
                 timer.start();
                 testDirectoryArray[i].updateExtensionUsingName(testInsertionEntry.getSurname(), "98765");
                 timer.stop();
-                // Add time to running total in order to calculate average later
-                testUpdateExtensionTime[(i*3)+1] += timer.getElapsedTime();
-                // Compare time to previous minimum, if smaller replace
-                if (timer.getElapsedTime() < testUpdateExtensionTime[(i*3)]) {
-                    testUpdateExtensionTime[(i*3)] = timer.getElapsedTime();
-                }
-                // Compare time to previous maximum, if larger replace
-                else if (timer.getElapsedTime() > testUpdateExtensionTime[(i*3)+2]) {
-                    testUpdateExtensionTime[(i*3)+2] = timer.getElapsedTime();
-                }
-                // Force the computer to sleep otherwise some times come back as 0 ns
-                TimeUnit.MILLISECONDS.sleep(1);
+                // Perform min, avg and max calculations
+                long[]returnedTimes = timeCalculations(testUpdateExtensionTime, i, timer.getElapsedTime());
+                System.arraycopy(returnedTimes, 0,testUpdateExtensionTime,0,3*testDirectoryArray.length);
                 timer.reset();
                 testDirectoryArray[i].updateExtensionUsingName(testInsertionEntry.getSurname(), "01234");
                 // Add progress to progress bar
@@ -308,18 +274,9 @@ public class CollectionAnalysis {
                 timer.start();
                 testDirectoryArray[i].lookupExtension(testDeletionEntry.getSurname());
                 timer.stop();
-                // Add time to running total in order to calculate average later
-                testLookupExtensionTime[(i*3)+1] += timer.getElapsedTime();
-                // Compare time to previous minimum, if smaller replace
-                if (timer.getElapsedTime() < testLookupExtensionTime[(i*3)]) {
-                    testLookupExtensionTime[(i*3)] = timer.getElapsedTime();
-                }
-                // Compare time to previous maximum, if larger replace
-                else if (timer.getElapsedTime() > testLookupExtensionTime[(i*3)+2]) {
-                    testLookupExtensionTime[(i*3)+2] = timer.getElapsedTime();
-                }
-                // Force the computer to sleep otherwise some times come back as 0 ns
-                TimeUnit.MILLISECONDS.sleep(1);
+                // Perform min, avg and max calculations
+                long[]returnedTimes = timeCalculations(testLookupExtensionTime, i, timer.getElapsedTime());
+                System.arraycopy(returnedTimes, 0,testLookupExtensionTime,0,3*testDirectoryArray.length);
                 timer.reset();
                 // Add progress to progress bar
                 progress.progress(1);
@@ -331,5 +288,21 @@ public class CollectionAnalysis {
 
 
         System.out.println(String.format("\n\nLookup Entry Extension Times:\n\n%-18s = %6d ns (min), %6d ns (avg), %9d ns (max)\n%-18s = %6d ns (min), %6d ns (avg), %9d ns (max)\n%-18s = %6d ns (min), %6d ns (avg), %9d ns (max)\n", testDirectoryTypes[0], testLookupExtensionTime[0], testLookupExtensionTime[1], testLookupExtensionTime[2], testDirectoryTypes[1], testLookupExtensionTime[3], testLookupExtensionTime[4], testLookupExtensionTime[5], testDirectoryTypes[2], testLookupExtensionTime[6], testLookupExtensionTime[7], testLookupExtensionTime[8]));
+    }
+
+    private static long[] timeCalculations(long[] times, int i, long timeElapsed) throws InterruptedException{
+        // Add time to running total in order to calculate average later
+        times[(i*3)+1] += timeElapsed;
+        // Compare time to previous minimum, if smaller replace
+        if (timeElapsed < times[(i*3)]) {
+            times[(i*3)] = timeElapsed;
+        }
+        // Compare time to previous maximum, if larger replace
+        else if (timeElapsed > times[(i*3)+2]) {
+            times[(i*3)+2] = timeElapsed;
+        }
+        // Force the computer to sleep otherwise some times come back as 0 ns
+        TimeUnit.MILLISECONDS.sleep(1);
+        return times;
     }
 }
