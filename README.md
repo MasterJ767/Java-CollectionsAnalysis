@@ -33,7 +33,7 @@ IntelliJ - IDE
 
 License:
 --------
-See 'LICENSE.md' for more details
+See [LICENSE.md](LICENSE.md) for more details
 
 Acknowledgements:
 -----------------
