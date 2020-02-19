@@ -1,0 +1,43 @@
+
+Performance Tests:
+
+
+
+Entry Insertion Times:
+
+ArrayDirectory     =   4328 ns (min),   9923 ns (avg),   2626779 ns (max)
+ArrayListDirectory =   3710 ns (min),   7106 ns (avg),     58434 ns (max)
+HashMapDirectory   =    309 ns (min),    761 ns (avg),    351227 ns (max)
+
+
+
+Entry Deletion By Name Times:
+
+ArrayDirectory     =   4637 ns (min),  11122 ns (avg),    346280 ns (max)
+ArrayListDirectory =   5874 ns (min),  12543 ns (avg),    195092 ns (max)
+HashMapDirectory   =    309 ns (min),   1055 ns (avg),     96464 ns (max)
+
+
+
+Entry Deletion By Extension Times:
+
+ArrayDirectory     =   5565 ns (min),   9398 ns (avg),    184270 ns (max)
+ArrayListDirectory =   7111 ns (min),  13536 ns (avg),    165719 ns (max)
+HashMapDirectory   =    309 ns (min),    922 ns (avg),     46068 ns (max)
+
+
+
+Update Entry Extension Times:
+
+ArrayDirectory     =   2473 ns (min),   6092 ns (avg),     94609 ns (max)
+ArrayListDirectory =   2782 ns (min),   6342 ns (avg),    135420 ns (max)
+HashMapDirectory   =    618 ns (min),   1106 ns (avg),     36483 ns (max)
+
+
+
+Lookup Entry Extension Times:
+
+ArrayDirectory     =   4019 ns (min),   8564 ns (avg),    229411 ns (max)
+ArrayListDirectory =   4328 ns (min),   9689 ns (avg),    214260 ns (max)
+HashMapDirectory   =    309 ns (min),   1113 ns (avg),     77295 ns (max)
+

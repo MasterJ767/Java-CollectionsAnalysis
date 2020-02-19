@@ -26,8 +26,12 @@ public class CollectionAnalysis {
         // Write records to an output csv file
         FileOutput.userOutput(directory.toArrayList());
 
+        String[] performanceResults = new String[6];
+
         // Performance testing
-        System.out.println("\nPerformance Tests:\n");
+        String titleResults = "\nPerformance Tests:\n";
+        performanceResults[0] = titleResults;
+        System.out.println(titleResults);
 
         // Create stopwatch object
         StopWatch timer = new StopWatch();
@@ -49,19 +53,32 @@ public class CollectionAnalysis {
         Entry testInsertionEntry = new Entry("Smith","A.B","01234");
 
         // Run InsertEntry tests
-        testInsertionEntryMethod(testDirectoryArray, choices, testNumber, timer, testInsertionEntry);
+        String insertEntryResults = testInsertionEntryMethod(testDirectoryArray, choices, testNumber, timer, testInsertionEntry);
+        performanceResults[1] = insertEntryResults;
+        System.out.println(insertEntryResults);
 
         // Run DeleteEntryByName tests
-        testDeletionEntryByNameMethod(testDirectoryArray, choices, testNumber, timer, testDeletionEntry);
+        String deletionEntryByNameResults = testDeletionEntryByNameMethod(testDirectoryArray, choices, testNumber, timer, testDeletionEntry);
+        performanceResults[2] = deletionEntryByNameResults;
+        System.out.println(deletionEntryByNameResults);
 
         // Run DeleteEntryByExtension tests
-        testDeletionEntryByExtensionMethod(testDirectoryArray, choices, testNumber, timer, testDeletionEntry);
+        String deletionEntryByExtensionResults = testDeletionEntryByExtensionMethod(testDirectoryArray, choices, testNumber, timer, testDeletionEntry);
+        performanceResults[3] = deletionEntryByExtensionResults;
+        System.out.println(deletionEntryByExtensionResults);
 
         // Run UpdateEntryExtension tests
-        testUpdateEntryExtensionMethod(testDirectoryArray, choices, testNumber, timer, testInsertionEntry);
+        String updateEntryExtensionResults = testUpdateEntryExtensionMethod(testDirectoryArray, choices, testNumber, timer, testInsertionEntry);
+        performanceResults[4] = updateEntryExtensionResults;
+        System.out.println(updateEntryExtensionResults);
 
         // Run LookupExtension tests
-        testLookupExtensionMethod(testDirectoryArray, choices, testNumber, timer, testDeletionEntry);
+        String lookupExtensionResults = testLookupExtensionMethod(testDirectoryArray, choices, testNumber, timer, testDeletionEntry);
+        performanceResults[5] = lookupExtensionResults;
+        System.out.println(lookupExtensionResults);
+
+        // Write performance results to an output txt file
+        FileOutput.performanceOutput(performanceResults);
     }
 
     private static Directory createDirectory(ArrayList<Entry> data, int variant) {
@@ -120,7 +137,7 @@ public class CollectionAnalysis {
         return choice;
     }
 
-    private static void testInsertionEntryMethod(Directory[] testDirectoryArray, String[] testDirectoryTypes, int testNumber, StopWatch timer, Entry testInsertionEntry) throws InterruptedException {
+    private static String testInsertionEntryMethod(Directory[] testDirectoryArray, String[] testDirectoryTypes, int testNumber, StopWatch timer, Entry testInsertionEntry) throws InterruptedException {
         // Create an array to time results of InsertEntry tests
         long[] testInsertionTime = new long[3*testDirectoryArray.length];
 
@@ -152,10 +169,10 @@ public class CollectionAnalysis {
         }
 
         // Print results of InsertEntry tests
-        System.out.println(String.format("\n\nEntry Insertion Times:\n\n%-18s = %6d ns (min), %6d ns (avg), %9d ns (max)\n%-18s = %6d ns (min), %6d ns (avg), %9d ns (max)\n%-18s = %6d ns (min), %6d ns (avg), %9d ns (max)\n", testDirectoryTypes[0], testInsertionTime[0], testInsertionTime[1], testInsertionTime[2], testDirectoryTypes[1], testInsertionTime[3], testInsertionTime[4], testInsertionTime[5], testDirectoryTypes[2], testInsertionTime[6], testInsertionTime[7], testInsertionTime[8]));
+        return String.format("\n\nEntry Insertion Test Times:\n\n%-18s = %6d ns (min), %6d ns (avg), %9d ns (max)\n%-18s = %6d ns (min), %6d ns (avg), %9d ns (max)\n%-18s = %6d ns (min), %6d ns (avg), %9d ns (max)\n", testDirectoryTypes[0], testInsertionTime[0], testInsertionTime[1], testInsertionTime[2], testDirectoryTypes[1], testInsertionTime[3], testInsertionTime[4], testInsertionTime[5], testDirectoryTypes[2], testInsertionTime[6], testInsertionTime[7], testInsertionTime[8]);
     }
 
-    private static void testDeletionEntryByNameMethod(Directory[] testDirectoryArray, String[] testDirectoryTypes, int testNumber, StopWatch timer, Entry testDeletionEntry) throws InterruptedException {
+    private static String testDeletionEntryByNameMethod(Directory[] testDirectoryArray, String[] testDirectoryTypes, int testNumber, StopWatch timer, Entry testDeletionEntry) throws InterruptedException {
         // Create an array to time results of DeleteEntryByName tests
         long[] testDeletionByNameTime = new long[3*testDirectoryArray.length];
 
@@ -186,10 +203,10 @@ public class CollectionAnalysis {
             testDeletionByNameTime[(i*3)+1] /= testNumber;
         }
 
-        System.out.println(String.format("\n\nEntry Deletion By Name Times:\n\n%-18s = %6d ns (min), %6d ns (avg), %9d ns (max)\n%-18s = %6d ns (min), %6d ns (avg), %9d ns (max)\n%-18s = %6d ns (min), %6d ns (avg), %9d ns (max)\n", testDirectoryTypes[0], testDeletionByNameTime[0], testDeletionByNameTime[1], testDeletionByNameTime[2], testDirectoryTypes[1], testDeletionByNameTime[3], testDeletionByNameTime[4], testDeletionByNameTime[5], testDirectoryTypes[2], testDeletionByNameTime[6], testDeletionByNameTime[7], testDeletionByNameTime[8]));
+        return String.format("\n\nEntry Deletion By Name Test Times:\n\n%-18s = %6d ns (min), %6d ns (avg), %9d ns (max)\n%-18s = %6d ns (min), %6d ns (avg), %9d ns (max)\n%-18s = %6d ns (min), %6d ns (avg), %9d ns (max)\n", testDirectoryTypes[0], testDeletionByNameTime[0], testDeletionByNameTime[1], testDeletionByNameTime[2], testDirectoryTypes[1], testDeletionByNameTime[3], testDeletionByNameTime[4], testDeletionByNameTime[5], testDirectoryTypes[2], testDeletionByNameTime[6], testDeletionByNameTime[7], testDeletionByNameTime[8]);
     }
 
-    private static void testDeletionEntryByExtensionMethod(Directory[] testDirectoryArray, String[] testDirectoryTypes, int testNumber, StopWatch timer, Entry testDeletionEntry) throws InterruptedException {
+    private static String testDeletionEntryByExtensionMethod(Directory[] testDirectoryArray, String[] testDirectoryTypes, int testNumber, StopWatch timer, Entry testDeletionEntry) throws InterruptedException {
         // Create an array to time results of DeleteEntryByExtension tests
         long[] testDeletionByExtensionTime = new long[3*testDirectoryArray.length];
 
@@ -220,10 +237,10 @@ public class CollectionAnalysis {
             testDeletionByExtensionTime[(i*3)+1] /= testNumber;
         }
 
-        System.out.println(String.format("\n\nEntry Deletion By Extension Times:\n\n%-18s = %6d ns (min), %6d ns (avg), %9d ns (max)\n%-18s = %6d ns (min), %6d ns (avg), %9d ns (max)\n%-18s = %6d ns (min), %6d ns (avg), %9d ns (max)\n", testDirectoryTypes[0], testDeletionByExtensionTime[0], testDeletionByExtensionTime[1], testDeletionByExtensionTime[2], testDirectoryTypes[1], testDeletionByExtensionTime[3], testDeletionByExtensionTime[4], testDeletionByExtensionTime[5], testDirectoryTypes[2], testDeletionByExtensionTime[6], testDeletionByExtensionTime[7], testDeletionByExtensionTime[8]));
+        return String.format("\n\nEntry Deletion By Extension Test Times:\n\n%-18s = %6d ns (min), %6d ns (avg), %9d ns (max)\n%-18s = %6d ns (min), %6d ns (avg), %9d ns (max)\n%-18s = %6d ns (min), %6d ns (avg), %9d ns (max)\n", testDirectoryTypes[0], testDeletionByExtensionTime[0], testDeletionByExtensionTime[1], testDeletionByExtensionTime[2], testDirectoryTypes[1], testDeletionByExtensionTime[3], testDeletionByExtensionTime[4], testDeletionByExtensionTime[5], testDirectoryTypes[2], testDeletionByExtensionTime[6], testDeletionByExtensionTime[7], testDeletionByExtensionTime[8]);
     }
 
-    private static void testUpdateEntryExtensionMethod(Directory[] testDirectoryArray, String[] testDirectoryTypes, int testNumber, StopWatch timer, Entry testInsertionEntry) throws InterruptedException {
+    private static String testUpdateEntryExtensionMethod(Directory[] testDirectoryArray, String[] testDirectoryTypes, int testNumber, StopWatch timer, Entry testInsertionEntry) throws InterruptedException {
         // Create an array to time results of UpdateEntryExtension tests
         long[] testUpdateExtensionTime = new long[3*testDirectoryArray.length];
 
@@ -254,10 +271,10 @@ public class CollectionAnalysis {
             testUpdateExtensionTime[(i*3)+1] /= testNumber;
         }
 
-        System.out.println(String.format("\n\nUpdate Entry Extension Times:\n\n%-18s = %6d ns (min), %6d ns (avg), %9d ns (max)\n%-18s = %6d ns (min), %6d ns (avg), %9d ns (max)\n%-18s = %6d ns (min), %6d ns (avg), %9d ns (max)\n", testDirectoryTypes[0], testUpdateExtensionTime[0], testUpdateExtensionTime[1], testUpdateExtensionTime[2], testDirectoryTypes[1], testUpdateExtensionTime[3], testUpdateExtensionTime[4], testUpdateExtensionTime[5], testDirectoryTypes[2], testUpdateExtensionTime[6], testUpdateExtensionTime[7], testUpdateExtensionTime[8]));
+        return String.format("\n\nUpdate Entry Extension Test Times:\n\n%-18s = %6d ns (min), %6d ns (avg), %9d ns (max)\n%-18s = %6d ns (min), %6d ns (avg), %9d ns (max)\n%-18s = %6d ns (min), %6d ns (avg), %9d ns (max)\n", testDirectoryTypes[0], testUpdateExtensionTime[0], testUpdateExtensionTime[1], testUpdateExtensionTime[2], testDirectoryTypes[1], testUpdateExtensionTime[3], testUpdateExtensionTime[4], testUpdateExtensionTime[5], testDirectoryTypes[2], testUpdateExtensionTime[6], testUpdateExtensionTime[7], testUpdateExtensionTime[8]);
     }
 
-    private static void testLookupExtensionMethod(Directory[] testDirectoryArray, String[] testDirectoryTypes, int testNumber, StopWatch timer, Entry testDeletionEntry) throws InterruptedException {
+    private static String testLookupExtensionMethod(Directory[] testDirectoryArray, String[] testDirectoryTypes, int testNumber, StopWatch timer, Entry testDeletionEntry) throws InterruptedException {
         // Create an array to time results of LookupExtension tests
         long[] testLookupExtensionTime = new long[3*testDirectoryArray.length];
 
@@ -287,7 +304,7 @@ public class CollectionAnalysis {
         }
 
 
-        System.out.println(String.format("\n\nLookup Entry Extension Times:\n\n%-18s = %6d ns (min), %6d ns (avg), %9d ns (max)\n%-18s = %6d ns (min), %6d ns (avg), %9d ns (max)\n%-18s = %6d ns (min), %6d ns (avg), %9d ns (max)\n", testDirectoryTypes[0], testLookupExtensionTime[0], testLookupExtensionTime[1], testLookupExtensionTime[2], testDirectoryTypes[1], testLookupExtensionTime[3], testLookupExtensionTime[4], testLookupExtensionTime[5], testDirectoryTypes[2], testLookupExtensionTime[6], testLookupExtensionTime[7], testLookupExtensionTime[8]));
+        return String.format("\n\nLookup Entry Extension Test Times:\n\n%-18s = %6d ns (min), %6d ns (avg), %9d ns (max)\n%-18s = %6d ns (min), %6d ns (avg), %9d ns (max)\n%-18s = %6d ns (min), %6d ns (avg), %9d ns (max)\n", testDirectoryTypes[0], testLookupExtensionTime[0], testLookupExtensionTime[1], testLookupExtensionTime[2], testDirectoryTypes[1], testLookupExtensionTime[3], testLookupExtensionTime[4], testLookupExtensionTime[5], testDirectoryTypes[2], testLookupExtensionTime[6], testLookupExtensionTime[7], testLookupExtensionTime[8]);
     }
 
     private static long[] timeCalculations(long[] times, int i, long timeElapsed) throws InterruptedException{
