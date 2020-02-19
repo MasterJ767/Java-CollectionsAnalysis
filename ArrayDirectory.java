@@ -105,28 +105,23 @@ public class ArrayDirectory implements Directory {
 
     @Override
     public void updateExtensionUsingName(String surname, String newNumber) {
-        if (newNumber.length() != 5) {
-            // Tell the user the new extension is of illegal length
-            throw new IllegalExtensionException(String.format("The extension %s is of length %d. Extensions should be of length 5.", newNumber, newNumber.length()));
-        } else {
-            boolean found = false;
-            // Find entry which contains the given surname
-            for (Entry entry : directory) {
-                if (entry.getSurname().equals(surname)) {
-                    // Change extension information
-                    entry.setExtension(newNumber);
-                    found = true;
-                    break;
-                }
-                found = false;
+        boolean found = false;
+        // Find entry which contains the given surname
+        for (Entry entry : directory) {
+            if (entry.getSurname().equals(surname)) {
+                // Change extension information
+                entry.setExtension(newNumber);
+                found = true;
+                break;
             }
-            if (!found) {
-                // If the given surname cannot be found within the directory throw an error
-                try {
-                    throw new SurnameNotFoundException(String.format("The surname %s could not be found in this ArrayDirectory, nothing was updated", surname));
-                } catch (SurnameNotFoundException e) {
-                    System.out.println(e.getMessage());
-                }
+            found = false;
+        }
+        if (!found) {
+            // If the given surname cannot be found within the directory throw an error
+            try {
+                throw new SurnameNotFoundException(String.format("The surname %s could not be found in this ArrayDirectory, nothing was updated", surname));
+            } catch (SurnameNotFoundException e) {
+                System.out.println(e.getMessage());
             }
         }
     }

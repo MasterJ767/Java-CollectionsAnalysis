@@ -11,11 +11,10 @@ public class Entry {
         if (extension.length() != 5) {
             // Tell the user which record is causing the issue and the location of the file causing the issue
             throw new IllegalExtensionException(String.format("The extension %s is of length %d. Extensions should be of length 5.", extension, extension.length()));
-        } else {
-            this.surname = surname;
-            this.initials = initials;
-            this.extension = extension;
         }
+        this.surname = surname;
+        this.initials = initials;
+        this.extension = extension;
     }
 
     public String getSurname() {
@@ -38,9 +37,8 @@ public class Entry {
         if (extension.length() != 5) {
             // Tell the user which record is causing the issue and the location of the file causing the issue
             throw new IllegalExtensionException(String.format("The extension %s is of length %d. Extensions should be of length 5.", extension, extension.length()));
-        } else {
-            this.extension = extension;
         }
+        this.extension = extension;
     }
 
     public String toString() {
