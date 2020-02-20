@@ -66,18 +66,28 @@ public class HashMapDirectory implements Directory {
 
     @Override
     public void updateExtensionUsingName(String surname, String newNumber) {
-        // Find entry which contains the given surname
-        if (surnameDirectory.containsKey(surname)) {
-            // Update extensionDirectory keys by deleting old k,v pair and reinserting entry with new extension as the key
-            extensionDirectory.remove(surnameDirectory.get(surname).getExtension());
-            extensionDirectory.put(newNumber, surnameDirectory.get(surname));
-            // Change extension information
-            surnameDirectory.get(surname).setExtension(newNumber);
+        // Forces extensions to be unique, if they are not this messes up the function of the HashMapDirectory
+        if (!extensionDirectory.containsKey(newNumber)) {
+            // Find entry which contains the given surname
+            if (surnameDirectory.containsKey(surname)) {
+                // Update extensionDirectory keys by deleting old k,v pair and reinserting entry with new extension as the key
+                extensionDirectory.remove(surnameDirectory.get(surname).getExtension());
+                extensionDirectory.put(newNumber, surnameDirectory.get(surname));
+                // Change extension information
+                surnameDirectory.get(surname).setExtension(newNumber);
+            } else {
+                // If the given surname cannot be found within the directory throw an error
+                try {
+                    throw new SurnameNotFoundException(String.format("The surname %s could not be found in this HashMapDirectory, nothing was updated", surname));
+                } catch (SurnameNotFoundException e) {
+                    System.out.println(e.getMessage());
+                }
+            }
         } else {
-            // If the given surname cannot be found within the directory throw an error
+            // If the given extension is already used by another entry throw an error
             try {
-                throw new SurnameNotFoundException(String.format("The surname %s could not be found in this HashMapDirectory, nothing was updated", surname));
-            } catch (SurnameNotFoundException e) {
+                throw new IllegalExtensionException(String.format("%s cannot have its extension updated to %s as the entry %s already uses this number as an extension.", surnameDirectory.get(surname), newNumber, extensionDirectory.get(newNumber)));
+            } catch (IllegalExtensionException e) {
                 System.out.println(e.getMessage());
             }
         }
