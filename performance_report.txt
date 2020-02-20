@@ -5,47 +5,47 @@ Performance Tests:
 
 Entry Insertion Test Times:
 
-ArrayDirectory     =   4328 ns (worst),  10596 ns (avg),  10092203 ns (best)
-ArrayListDirectory =   4329 ns (worst),   8180 ns (avg),   1224347 ns (best)
-HashMapDirectory   =    309 ns (worst),    682 ns (avg),    112541 ns (best)
+ArrayDirectory     =   4328 ns (best),  10882 ns (average),   3228751 ns (worst)
+ArrayListDirectory =   4019 ns (best),  10865 ns (average),   4385078 ns (worst)
+HashMapDirectory   =    309 ns (best),    892 ns (average),     61835 ns (worst)
 
 
 
 Entry Deletion By Name Test Times:
 
-ArrayDirectory     =   2782 ns (worst),   6414 ns (avg),    198802 ns (best)
-ArrayListDirectory =   3092 ns (worst),   6464 ns (avg),    116560 ns (best)
-HashMapDirectory   =    309 ns (worst),   1444 ns (avg),     93990 ns (best)
+ArrayDirectory     =   2782 ns (best),   7627 ns (average),   2258239 ns (worst)
+ArrayListDirectory =   3400 ns (best),   9053 ns (average),   1341834 ns (worst)
+HashMapDirectory   =    309 ns (best),   1491 ns (average),    123981 ns (worst)
 
 
 
 Entry Deletion By Extension Test Times:
 
-ArrayDirectory     =   3710 ns (worst),   6546 ns (avg),   1378626 ns (best)
-ArrayListDirectory =   4328 ns (worst),   7327 ns (avg),    136039 ns (best)
-HashMapDirectory   =    309 ns (worst),   1223 ns (avg),     86261 ns (best)
+ArrayDirectory     =   3710 ns (best),   9089 ns (average),   1569080 ns (worst)
+ArrayListDirectory =   4328 ns (best),   8162 ns (average),    250743 ns (worst)
+HashMapDirectory   =    309 ns (best),   1348 ns (average),    206531 ns (worst)
 
 
 
 Update Entry Extension Test Times:
 
-ArrayDirectory     =   2782 ns (worst),   6189 ns (avg),   1312772 ns (best)
-ArrayListDirectory =   3091 ns (worst),   6611 ns (avg),    120889 ns (best)
-HashMapDirectory   =    309 ns (worst),   1014 ns (avg),     42358 ns (best)
+ArrayDirectory     =   3091 ns (best),   6982 ns (average),    231265 ns (worst)
+ArrayListDirectory =   3400 ns (best),   8728 ns (average),    133875 ns (worst)
+HashMapDirectory   =    309 ns (best),   1119 ns (average),     81932 ns (worst)
 
 
 
 Lookup Entry Extension Test Times:
 
-ArrayDirectory     =   4637 ns (worst),   7549 ns (avg),    162628 ns (best)
-ArrayListDirectory =   3401 ns (worst),   6352 ns (avg),    235903 ns (best)
-HashMapDirectory   =    309 ns (worst),   1210 ns (avg),     61526 ns (best)
+ArrayDirectory     =   4328 ns (best),  10474 ns (average),    587129 ns (worst)
+ArrayListDirectory =   3092 ns (best),   9067 ns (average),   4127224 ns (worst)
+HashMapDirectory   =    309 ns (best),   1391 ns (average),     56579 ns (worst)
 
 
 
 ToArrayList Test Times:
 
-ArrayDirectory     =   6492 ns (worst),  11446 ns (avg),   6839955 ns (best)
-ArrayListDirectory =      0 ns (worst),    496 ns (avg),     72657 ns (best)
-HashMapDirectory   =  12676 ns (worst),  32911 ns (avg),   1260830 ns (best)
+ArrayDirectory     =   6492 ns (best),  10787 ns (average),   1401197 ns (worst)
+ArrayListDirectory =      0 ns (best),    574 ns (average),     48541 ns (worst)
+HashMapDirectory   =  11440 ns (best),  33687 ns (average),  28273133 ns (worst)
 

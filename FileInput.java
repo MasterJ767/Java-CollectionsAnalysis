@@ -5,7 +5,7 @@ import javax.swing.filechooser.*;
 import java.nio.file.*;
 
 class FileInput {
-    private static ArrayList<Entry> readCSV(File location) throws IOException {
+    public static ArrayList<Entry> readCSV(File location) throws IOException {
         // Convert CSV entries into records
         BufferedReader inFile = new BufferedReader(new FileReader(location));
         String row;
