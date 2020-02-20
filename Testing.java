@@ -1,4 +1,5 @@
 import java.util.*;
+import java.lang.*;
 
 public class Testing {
     /** Running this program will check that all directory methods work as intended.
@@ -57,38 +58,46 @@ public class Testing {
     private static void correctnessTest(String title, Directory testDirectory, Entry sampleEntry, Entry duplicateEntry) {
         System.out.println(String.format("\n%sDirectory Correctness Tests:",title));
         // Check the directory is the size that it is supposed to be
+        assert testDirectory.toArrayList().size() == 5;
         System.out.println(testDirectory.toArrayList().size() == 5); // Should print True
         // Test the insertEntry method
         testDirectory.insertEntry(sampleEntry);
         // Directory should be one longer
+        assert testDirectory.toArrayList().size() == 6;
         System.out.println(testDirectory.toArrayList().size() == 6); // Should print True
         // Test deleteEntryUsingName method
         testDirectory.deleteEntryUsingName("Skiggs");
         // Directory should no longer contain the inserted entry and the size of the directory should now be 5
+        assert !testDirectory.toArrayList().contains(sampleEntry) && testDirectory.toArrayList().size() == 5;
         System.out.println(!testDirectory.toArrayList().contains(sampleEntry) && testDirectory.toArrayList().size() == 5); // Should print True
         // Add the same entry back and remove by extension this time
         testDirectory.insertEntry(sampleEntry);
         testDirectory.deleteEntryUsingExtension("68342");
         // Directory should not contain the sampleEntry and should still only contain 5 entries
+        assert !testDirectory.toArrayList().contains(sampleEntry) && testDirectory.toArrayList().size() == 5;
         System.out.println(!testDirectory.toArrayList().contains(sampleEntry) && testDirectory.toArrayList().size() == 5); // Should print True
         // Test UpdateExtensionUsingName method
         testDirectory.updateExtensionUsingName("Mayow","12345");
         // Test LookupExtension method
+        assert testDirectory.lookupExtension("Mayow").equals("12345");
         System.out.println(testDirectory.lookupExtension("Mayow").equals("12345")); // Should print True
         // Test when an Entry extension is updated the given entry is of the correct format
         try {
             testDirectory.updateExtensionUsingName("Mayow", "983421");
         } catch (IllegalExtensionException i) {
+            assert testDirectory.lookupExtension("Mayow").equals("12345");
             System.out.println(testDirectory.lookupExtension("Mayow").equals("12345")); // Should print True
         }
         try {
             testDirectory.updateExtensionUsingName("Mayow", "9834R");
         } catch (IllegalExtensionException e) {
+            assert testDirectory.lookupExtension("Mayow").equals("12345");
             System.out.println(testDirectory.lookupExtension("Mayow").equals("12345")); // Should print True
         }
         // Test that logically equivalent entries (duplicates) are not added to the directory
         testDirectory.insertEntry(duplicateEntry);
         // Directory should remain size 5
+        assert testDirectory.toArrayList().size() == 5;
         System.out.println(testDirectory.toArrayList().size() == 5); // Should print True
     }
 }

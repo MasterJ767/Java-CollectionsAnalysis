@@ -27,6 +27,14 @@ performs each method. The fastest time, average time and slowest types that each
 each method are printed to console, then written to a configurable performance results text file. Similarly to the 
 other files used in this program, there is a default file if you enter an invalid file name and close the file chooser.
 
+Running the tests:
+------------------
+Run the Testing.java file to begin execution of tests on the program.
+
+When the tests are run, there will be 26 print statements which will print either true or false depending on whether the
+methods function correctly or not. If all methods function correctly within the directories, then all the print 
+statements should be true. 
+
 Built With:
 -----------
 IntelliJ - IDE
