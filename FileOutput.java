@@ -37,7 +37,7 @@ class FileOutput {
                 }
                 // Convert entries to records and write into file location
                 writeCSV(file, records);
-            } catch (NullPointerException|IOException n) {
+            } catch (NullPointerException|IOException e) {
                 System.out.println("You failed to select a valid file with JFileChooser, the program will default to using output_data.csv file.");
                 // Convert entries to records and write into file location
                 writeCSV(new File("output_data.csv"), records);
@@ -58,14 +58,14 @@ class FileOutput {
         /* Initialise file choosing objects, in case it is necessary to use them later
         JFileChooser defaults to current working directory and filters files for csv files*/
         JFileChooser chooser = new JFileChooser(Paths.get("").toAbsolutePath().toString());
-        chooser.setFileFilter(new FileNameExtensionFilter("TEXT FILE (*.txt)", ".txt", "text"));
+        chooser.setFileFilter(new FileNameExtensionFilter("TEXT FILE (*.txt, *.text)", ".txt", "txt", ".text", "text"));
         File file = null;
         // Ask for user to input a file location
         Scanner input = new Scanner(System.in);
         System.out.print("Enter the pathname of the file which you would like performance results to be written to:\n> ");
         String pathname = input.nextLine();
         // Bring up JFileChooser if pathname does not end with ".txt" as it is not a TEXT file, so make user select file with JFileChooser
-        if (pathname.endsWith(".txt")) {
+        if (pathname.endsWith(".txt") || pathname.endsWith(".text")) {
             // Convert entries to records and write into file location
             writeTXT(new File(pathname), information);
         } else {
@@ -77,7 +77,7 @@ class FileOutput {
                 }
                 // Convert entries to records and write into file location
                 writeTXT(file, information);
-            } catch (NullPointerException|IOException n) {
+            } catch (NullPointerException|IOException e) {
                 System.out.println("You failed to select a valid file with JFileChooser, the program will default to using performance_report.txt file.");
                 // Convert entries to records and write into file location
                 writeTXT(new File("performance_report.txt"), information);

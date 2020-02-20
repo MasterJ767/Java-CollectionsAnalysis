@@ -59,7 +59,7 @@ class FileInput {
         try {
             // Read in records from file location and convert them to entries
             return readCSV(new File(pathname));
-        } catch (IOException e) {
+        } catch (IOException ioe) {
             System.out.println("The filename you entered was not a *.csv file, please use the file chooser to select the correct file.");
             // Switch to default file if user presses cancel in the JFileChooser window
             try {
@@ -68,7 +68,7 @@ class FileInput {
                 }
                 // Read in records from file location and convert them to entries
                 return readCSV(file);
-            } catch (NullPointerException|IOException n) {
+            } catch (NullPointerException|IOException e) {
                 System.out.println("You failed to select a valid file with JFileChooser, the program will default to using test_data.csv file.");
                 // Read in records from file location and convert them to entries
                 return readCSV(new File("test_data.csv"));
