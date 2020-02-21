@@ -42,7 +42,7 @@ public class ProgressBar {
     public void show() {
         long sec = Instant.now().getEpochSecond() - start_time;
         float percent = 100 * counter / total;
-        String title = String.format("%s (%.0f%% %02.0f:%02.0f)", this.title, percent, (float) sec / 60, (float) sec % 60);
+        String title = String.format("%s (%.0f%% %02d:%02.0f)", this.title, percent, sec / 60, (float) sec % 60);
         if (title.length() >= this.width) {
             throw new IllegalArgumentException("Progress bar does not fit width. Shorten title of increase width.");
         }

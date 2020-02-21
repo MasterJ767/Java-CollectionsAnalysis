@@ -26,15 +26,15 @@ public class Testing {
         testEntries.add(entry5);
 
         // Test all methods on ArrayDirectory - should print True 8 times
-        Directory testArrayDirectory = CollectionAnalysis.createDirectory(testEntries,1);
+        Directory testArrayDirectory = Launcher.createDirectory(testEntries,1);
         correctnessTest("Array", testArrayDirectory, entry6, entryDuplicate);
 
         // Test all methods on ArrayListDirectory - should print True 8 times
-        Directory testArrayListDirectory = CollectionAnalysis.createDirectory(testEntries,2);
+        Directory testArrayListDirectory = Launcher.createDirectory(testEntries,2);
         correctnessTest("ArrayList", testArrayListDirectory, entry6, entryDuplicate);
 
         // Test all methods on HashMapDirectory - should print True 8 times
-        Directory testHashMapDirectory = CollectionAnalysis.createDirectory(testEntries,3);
+        Directory testHashMapDirectory = Launcher.createDirectory(testEntries,3);
         correctnessTest("HashMap", testHashMapDirectory, entry6, entryDuplicate);
 
         // Test extensions are the correct format when being created - should print true 2 times

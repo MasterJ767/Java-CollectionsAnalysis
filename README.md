@@ -9,7 +9,7 @@ None
 
 How to use:
 -----------
-Run the CollectionAnalysis.java file to begin execution of the program.
+Run the Launcher.java file to begin execution of the program.
 
 The program will ask for the location of an input csv file so that it may extract staff entries to put into a directory.
 If the file input does not exist, a pop-up window will appear and ask you to search manually through the computer to 

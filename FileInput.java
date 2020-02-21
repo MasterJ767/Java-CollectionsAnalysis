@@ -75,4 +75,34 @@ class FileInput {
             }
         }
     }
+
+    static int listPrint(List<String> options) {
+        // Iterate over a list of choices, print to screen choices with a corresponding number
+        ListIterator<String> iter = options.listIterator();
+        while (iter.hasNext()) {
+            System.out.println((iter.nextIndex()+1) + ". " + iter.next());
+        }
+        // Take in the user's choice as an integer
+        int choice;
+        Scanner input = new Scanner(System.in);
+        System.out.print("> ");
+        // Keep asking for user input until they enter something in the correct format
+        while (true) {
+            try {
+                choice = input.nextInt();
+                // If the number is less than 1 or greater than the number that corresponds ot the final choice, throw an error
+                if ((choice < 1) || (choice > options.size())) {
+                    throw new IndexOutOfBoundsException();
+                }
+            // Catch out of range or wrong user input type errors
+            } catch (InputMismatchException|ClassCastException|IndexOutOfBoundsException e) {
+                System.out.print("Please enter the number which corresponds to your choice.\n> ");
+                input.next();
+                continue;
+            }
+            break;
+        }
+        // Return the number that corresponds to the user's choice
+        return choice;
+    }
 }
