@@ -1,7 +1,7 @@
 import java.util.*;
 
 public class ArrayListDirectory implements Directory {
-    private ArrayList<Entry> directory;
+    private List<Entry> directory;
 
     public ArrayListDirectory() {
         // Construct an empty ArrayList on initialisation of class

@@ -18,7 +18,7 @@ public class Testing {
         Entry entryDuplicate = new Entry("Prott","R.M", "98342");
 
         // Create an ArrayList of test entries
-        ArrayList<Entry> testEntries = new ArrayList<>();
+        List<Entry> testEntries = new ArrayList<>();
         testEntries.add(entry1);
         testEntries.add(entry2);
         testEntries.add(entry3);

@@ -148,7 +148,7 @@ public class ArrayDirectory implements Directory {
     @Override
     public List<Entry> toArrayList() {
         // Copy contents of the directory to an ArrayList and return
-        ArrayList<Entry> listDirectory = new ArrayList<>();
+        List<Entry> listDirectory = new ArrayList<>();
         Collections.addAll(listDirectory, directory);
         return listDirectory;
     }

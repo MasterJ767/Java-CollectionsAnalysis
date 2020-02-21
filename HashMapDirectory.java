@@ -1,8 +1,8 @@
 import java.util.*;
 
 public class HashMapDirectory implements Directory {
-    private HashMap<String, Entry> surnameDirectory;
-    private HashMap<String, Entry> extensionDirectory;
+    private Map<String, Entry> surnameDirectory;
+    private Map<String, Entry> extensionDirectory;
 
     public HashMapDirectory() {
         // Construct two empty HashMaps on initialisation of class

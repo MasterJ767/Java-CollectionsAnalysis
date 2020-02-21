@@ -5,11 +5,11 @@ import javax.swing.filechooser.*;
 import java.nio.file.*;
 
 class FileInput {
-    public static ArrayList<Entry> readCSV(File location) throws IOException {
+    public static List<Entry> readCSV(File location) throws IOException {
         // Convert CSV entries into records
         BufferedReader inFile = new BufferedReader(new FileReader(location));
         String row;
-        ArrayList<Entry> records = new ArrayList<>();
+        List<Entry> records = new ArrayList<>();
         while ((row = inFile.readLine()) != null) {
             // Split lines from the file about the ',' character and place the line parts in a String Array
             String[] data = row.split(",");
@@ -27,9 +27,9 @@ class FileInput {
         return records;
     }
 
-    static ArrayList<Entry> convertRecords(String[] args) {
+    static List<Entry> convertRecords(String[] args) {
         // Convert command line entries into records
-        ArrayList<Entry> records = new ArrayList<>();
+        List<Entry> records = new ArrayList<>();
         for (String element: args) {
             String[] data = element.split(",");
             // Throw error if record does not split into three parts
@@ -45,7 +45,7 @@ class FileInput {
         return records;
     }
 
-    static ArrayList<Entry> userInput() throws IOException{
+    static List<Entry> userInput() throws IOException{
         /* Initialise file choosing objects, in case it is necessary to use them later
         JFileChooser defaults to current working directory and filters files for csv files*/
         JFileChooser chooser = new JFileChooser(Paths.get("").toAbsolutePath().toString());

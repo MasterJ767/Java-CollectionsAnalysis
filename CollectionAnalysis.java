@@ -5,12 +5,12 @@ import java.util.concurrent.TimeUnit;
 public class CollectionAnalysis {
     public static void main(String[] args) throws IOException, InterruptedException {
         // Convert records from the command line configuration into a format ready to be inserted into the directory
-        ArrayList<Entry> dirtyData = FileInput.convertRecords(args);
+        List<Entry> dirtyData = FileInput.convertRecords(args);
         // Collect records from an input csv file and add to command line configuration records
         dirtyData.addAll(FileInput.userInput());
 
         // Remove duplicate Entry Objects
-        ArrayList<Entry> cleanData = removeDuplicates(dirtyData);
+        List<Entry> cleanData = removeDuplicates(dirtyData);
 
         // Asks the user which Directory implementation they would like to use
         System.out.println("\nHow would you like to store your data?");
@@ -83,7 +83,7 @@ public class CollectionAnalysis {
         FileOutput.performanceOutput(performanceResults);
     }
 
-    static Directory createDirectory(ArrayList<Entry> data, int variant) {
+    static Directory createDirectory(List<Entry> data, int variant) {
         // Initialise a Directory and an Array of entries
         Directory newDirectory;
 
@@ -105,8 +105,8 @@ public class CollectionAnalysis {
         return newDirectory;
     }
 
-    private static ArrayList<Entry> removeDuplicates(ArrayList<Entry> dirtyData) {
-        ArrayList<Entry> cleanData = new ArrayList<>();
+    private static List<Entry> removeDuplicates(List<Entry> dirtyData) {
+        List<Entry> cleanData = new ArrayList<>();
         for (Entry entry: dirtyData) {
             if (!(cleanData.contains(entry))) {
                 cleanData.add(entry);
@@ -174,7 +174,7 @@ public class CollectionAnalysis {
         return String.format("\n\nEntry Insertion Test Times:\n\n%-18s = %6d ns (best), %6d ns (average), %9d ns (worst)\n%-18s = %6d ns (best), %6d ns (average), %9d ns (worst)\n%-18s = %6d ns (best), %6d ns (average), %9d ns (worst)\n", testDirectoryTypes[0], testInsertionTime[0], testInsertionTime[1], testInsertionTime[2], testDirectoryTypes[1], testInsertionTime[3], testInsertionTime[4], testInsertionTime[5], testDirectoryTypes[2], testInsertionTime[6], testInsertionTime[7], testInsertionTime[8]);
     }
 
-    private static String testDeletionEntryByNameMethod(Directory[] testDirectoryArray, String[] testDirectoryTypes, int testNumber, StopWatch timer, ArrayList<Entry> testData) throws InterruptedException {
+    private static String testDeletionEntryByNameMethod(Directory[] testDirectoryArray, String[] testDirectoryTypes, int testNumber, StopWatch timer, List<Entry> testData) throws InterruptedException {
         // Create an array to time results of DeleteEntryByName tests
         long[] testDeletionByNameTime = new long[3*testDirectoryArray.length];
 
@@ -214,7 +214,7 @@ public class CollectionAnalysis {
         return String.format("\n\nEntry Deletion By Name Test Times:\n\n%-18s = %6d ns (best), %6d ns (average), %9d ns (worst)\n%-18s = %6d ns (best), %6d ns (average), %9d ns (worst)\n%-18s = %6d ns (best), %6d ns (average), %9d ns (worst)\n", testDirectoryTypes[0], testDeletionByNameTime[0], testDeletionByNameTime[1], testDeletionByNameTime[2], testDirectoryTypes[1], testDeletionByNameTime[3], testDeletionByNameTime[4], testDeletionByNameTime[5], testDirectoryTypes[2], testDeletionByNameTime[6], testDeletionByNameTime[7], testDeletionByNameTime[8]);
     }
 
-    private static String testDeletionEntryByExtensionMethod(Directory[] testDirectoryArray, String[] testDirectoryTypes, int testNumber, StopWatch timer, ArrayList<Entry> testData) throws InterruptedException {
+    private static String testDeletionEntryByExtensionMethod(Directory[] testDirectoryArray, String[] testDirectoryTypes, int testNumber, StopWatch timer, List<Entry> testData) throws InterruptedException {
         // Create an array to time results of DeleteEntryByExtension tests
         long[] testDeletionByExtensionTime = new long[3*testDirectoryArray.length];
 
